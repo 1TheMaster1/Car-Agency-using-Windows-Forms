@@ -22,6 +22,8 @@ namespace Project //Yamen
             commission = 100;
         }
 
+        public int NumberOfSales {  get { return numberOfSales; } set { if (value >= 0) numberOfSales = value; } }
+
         public override int GetSalary()
         {
             return Salary + commission * numberOfSales;

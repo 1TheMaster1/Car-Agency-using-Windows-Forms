@@ -13,7 +13,7 @@ namespace Project //Yamen
         string id;
         string name;
         int age;
-        static int count = 2000; //for creating IDs
+        static int count = 2001; //for creating IDs
         string phoneNumber;
         int numberOfPurchase;
         int totalPayment;

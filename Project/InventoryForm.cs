@@ -25,11 +25,6 @@ namespace Project
             }
         }
 
-        private void searchComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void searchButton_Click(object sender, EventArgs e)
         {
             Inventory inventoryObject = new Inventory();
@@ -102,6 +97,7 @@ namespace Project
                 }
             }
             inventoryObject.Quantity += Convert.ToInt32(amountTextBox.Text);
+
         }
 
         private void sellButton_Click(object sender, EventArgs e)

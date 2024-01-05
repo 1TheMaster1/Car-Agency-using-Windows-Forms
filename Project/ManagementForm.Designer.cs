@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             employeeGroupBox = new GroupBox();
+            resetButton1 = new Button();
             jobLabel = new Label();
             jobComboBox = new ComboBox();
             salaryLabel = new Label();
@@ -42,6 +43,7 @@
             updateEmployeeButton = new Button();
             removeEmployeeButton = new Button();
             customerGroupBox = new GroupBox();
+            resetButton2 = new Button();
             customerNumberTextBox = new TextBox();
             customerAgeTextBox = new TextBox();
             customerNameTextBox = new TextBox();
@@ -59,6 +61,7 @@
             // 
             // employeeGroupBox
             // 
+            employeeGroupBox.Controls.Add(resetButton1);
             employeeGroupBox.Controls.Add(jobLabel);
             employeeGroupBox.Controls.Add(jobComboBox);
             employeeGroupBox.Controls.Add(salaryLabel);
@@ -76,6 +79,16 @@
             employeeGroupBox.TabIndex = 0;
             employeeGroupBox.TabStop = false;
             employeeGroupBox.Text = "Add Employee";
+            // 
+            // resetButton1
+            // 
+            resetButton1.Location = new Point(37, 310);
+            resetButton1.Name = "resetButton1";
+            resetButton1.Size = new Size(77, 33);
+            resetButton1.TabIndex = 14;
+            resetButton1.Text = "Reset";
+            resetButton1.UseVisualStyleBackColor = true;
+            resetButton1.Click += resetButton1_Click;
             // 
             // jobLabel
             // 
@@ -195,6 +208,7 @@
             // 
             // customerGroupBox
             // 
+            customerGroupBox.Controls.Add(resetButton2);
             customerGroupBox.Controls.Add(customerNumberTextBox);
             customerGroupBox.Controls.Add(customerAgeTextBox);
             customerGroupBox.Controls.Add(customerNameTextBox);
@@ -210,6 +224,16 @@
             customerGroupBox.TabIndex = 4;
             customerGroupBox.TabStop = false;
             customerGroupBox.Text = "Add Customer";
+            // 
+            // resetButton2
+            // 
+            resetButton2.Location = new Point(37, 250);
+            resetButton2.Name = "resetButton2";
+            resetButton2.Size = new Size(77, 36);
+            resetButton2.TabIndex = 7;
+            resetButton2.Text = "Reset";
+            resetButton2.UseVisualStyleBackColor = true;
+            resetButton2.Click += resetButton2_Click;
             // 
             // customerNumberTextBox
             // 
@@ -368,5 +392,7 @@
         private Button updateCustomerButton;
         private Button removeCustomerButton;
         private Button backButton;
+        private Button resetButton1;
+        private Button resetButton2;
     }
 }

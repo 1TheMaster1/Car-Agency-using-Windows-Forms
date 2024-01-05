@@ -8,5 +8,8 @@ namespace Project //Omar
 {//base class for all Invoices
     internal class Invoice
     {
+        int payment;
+
+        public int Payment { get { return payment; } set { payment = value; } }
     }
 }
