@@ -18,15 +18,17 @@ namespace Project
         Car carCurrent = new Car();
         int amount = 0;
         int payment = 0;
-        public static InventoryForm prevInventoryForm = new InventoryForm();
+        public static InventoryForm prevForm = new InventoryForm();
 
         public SellCarForm(Employee employee, Inventory inventory, InventoryForm inventoryForm)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             employeeCurrent = employee;
             inventoryCurrent = inventory;
             carCurrent = inventoryCurrent.Car;
-            prevInventoryForm = inventoryForm;
+            prevForm = inventoryForm;
+
             customerDisplayList.Items.Clear();
             customerDisplayList.Items.Add("ID\tName\tAge\tPhone Number\tNo. of Purchases\tTotal Payment");
             customerDisplayList.Items.Add("------------------------------------------------------------------------------------");
@@ -61,6 +63,12 @@ namespace Project
                 CustomerCarPurchaseInvoice invoice = new CustomerCarPurchaseInvoice(payment, employeeCurrent, amount, customer, carCurrent);
                 CustomerCarPurchaseInvoice.customerCarPurchaseInvoiceList.Add(invoice);
                 inventoryCurrent.Quantity -= amount;
+                if (employeeCurrent is CommissionedSales)
+                {
+                    CommissionedSales commissionedSales = (CommissionedSales)employeeCurrent;
+                    commissionedSales.NumberOfSales ++;
+                }
+                noButton_Click(sender, e);
             }
             else
                 MessageBox.Show("Select a customer");
@@ -69,12 +77,13 @@ namespace Project
         private void noButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            prevInventoryForm.Show();
+            prevForm.Show();
         }
 
-        private void SellCarForm_FormClosed(object sender, FormClosedEventArgs e)
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            prevInventoryForm.Show();
+            base.OnFormClosing(e);
+            prevForm.Show();
         }
     }
 }

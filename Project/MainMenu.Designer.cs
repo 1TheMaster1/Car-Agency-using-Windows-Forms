@@ -121,7 +121,6 @@
             Name = "MainMenu";
             ShowIcon = false;
             Text = "MainMenu";
-            FormClosed += MainMenu_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

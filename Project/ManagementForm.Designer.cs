@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             employeeGroupBox = new GroupBox();
-            resetButton1 = new Button();
+            employeeResetButton = new Button();
             jobLabel = new Label();
             jobComboBox = new ComboBox();
             salaryLabel = new Label();
@@ -43,7 +43,7 @@
             updateEmployeeButton = new Button();
             removeEmployeeButton = new Button();
             customerGroupBox = new GroupBox();
-            resetButton2 = new Button();
+            customerResetButton = new Button();
             customerNumberTextBox = new TextBox();
             customerAgeTextBox = new TextBox();
             customerNameTextBox = new TextBox();
@@ -61,7 +61,7 @@
             // 
             // employeeGroupBox
             // 
-            employeeGroupBox.Controls.Add(resetButton1);
+            employeeGroupBox.Controls.Add(employeeResetButton);
             employeeGroupBox.Controls.Add(jobLabel);
             employeeGroupBox.Controls.Add(jobComboBox);
             employeeGroupBox.Controls.Add(salaryLabel);
@@ -80,15 +80,15 @@
             employeeGroupBox.TabStop = false;
             employeeGroupBox.Text = "Add Employee";
             // 
-            // resetButton1
+            // employeeResetButton
             // 
-            resetButton1.Location = new Point(37, 310);
-            resetButton1.Name = "resetButton1";
-            resetButton1.Size = new Size(77, 33);
-            resetButton1.TabIndex = 14;
-            resetButton1.Text = "Reset";
-            resetButton1.UseVisualStyleBackColor = true;
-            resetButton1.Click += resetButton1_Click;
+            employeeResetButton.Location = new Point(37, 310);
+            employeeResetButton.Name = "employeeResetButton";
+            employeeResetButton.Size = new Size(77, 33);
+            employeeResetButton.TabIndex = 14;
+            employeeResetButton.Text = "Reset";
+            employeeResetButton.UseVisualStyleBackColor = true;
+            employeeResetButton.Click += employeeResetButton_Click;
             // 
             // jobLabel
             // 
@@ -208,7 +208,7 @@
             // 
             // customerGroupBox
             // 
-            customerGroupBox.Controls.Add(resetButton2);
+            customerGroupBox.Controls.Add(customerResetButton);
             customerGroupBox.Controls.Add(customerNumberTextBox);
             customerGroupBox.Controls.Add(customerAgeTextBox);
             customerGroupBox.Controls.Add(customerNameTextBox);
@@ -225,15 +225,15 @@
             customerGroupBox.TabStop = false;
             customerGroupBox.Text = "Add Customer";
             // 
-            // resetButton2
+            // customerResetButton
             // 
-            resetButton2.Location = new Point(37, 250);
-            resetButton2.Name = "resetButton2";
-            resetButton2.Size = new Size(77, 36);
-            resetButton2.TabIndex = 7;
-            resetButton2.Text = "Reset";
-            resetButton2.UseVisualStyleBackColor = true;
-            resetButton2.Click += resetButton2_Click;
+            customerResetButton.Location = new Point(37, 250);
+            customerResetButton.Name = "customerResetButton";
+            customerResetButton.Size = new Size(77, 36);
+            customerResetButton.TabIndex = 7;
+            customerResetButton.Text = "Reset";
+            customerResetButton.UseVisualStyleBackColor = true;
+            customerResetButton.Click += customerResetButton_Click;
             // 
             // customerNumberTextBox
             // 
@@ -340,6 +340,7 @@
             backButton.TabIndex = 8;
             backButton.Text = "Back";
             backButton.UseVisualStyleBackColor = true;
+            backButton.Click += backButton_Click;
             // 
             // ManagementForm
             // 
@@ -392,7 +393,7 @@
         private Button updateCustomerButton;
         private Button removeCustomerButton;
         private Button backButton;
-        private Button resetButton1;
-        private Button resetButton2;
+        private Button employeeResetButton;
+        private Button customerResetButton;
     }
 }

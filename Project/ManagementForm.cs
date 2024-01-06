@@ -13,11 +13,15 @@ namespace Project
     public partial class ManagementForm : Form
     {
         Employee employeeCurrent = new Employee();
+        bool check = true;
+        public static MainMenu prevForm = new MainMenu();     
 
-        public ManagementForm(Employee employee)
+        public ManagementForm(Employee employee, MainMenu mainMenu)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             employeeCurrent = employee;
+            prevForm = mainMenu;
         }
 
         private void addEmployeeButton_Click(object sender, EventArgs e)
@@ -114,7 +118,7 @@ namespace Project
             updateCustomerButton_Click(sender, e);
         }
 
-        private void resetButton1_Click(object sender, EventArgs e)
+        private void employeeResetButton_Click(object sender, EventArgs e)
         {
             foreach (Control c in employeeGroupBox.Controls)
             {
@@ -130,7 +134,7 @@ namespace Project
             }
         }
 
-        private void resetButton2_Click(object sender, EventArgs e)
+        private void customerResetButton_Click(object sender, EventArgs e)
         {
             foreach (Control c in customerGroupBox.Controls)
             {
@@ -144,6 +148,26 @@ namespace Project
                         }
                 }
             }
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            check = false;
+            this.Hide();
+            prevForm.Show();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing && check)
+            {
+                if (MessageBox.Show("Close?", "Close", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+                e.Cancel = true;
+            }
+            check = true;
         }
     }
 }

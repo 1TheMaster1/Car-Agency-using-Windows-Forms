@@ -15,6 +15,7 @@ namespace Project
         Employee employeeCurrent = new Employee();
         public ServiceForm(Employee employee)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             employeeCurrent = employee;
         }

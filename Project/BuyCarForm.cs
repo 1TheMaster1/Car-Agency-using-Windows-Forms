@@ -13,15 +13,20 @@ namespace Project
     public partial class BuyCarForm : Form
     {
         Employee employeeCurrent = new Employee();
+        Inventory inventoryCurrent = new Inventory();
         Car carCurrent = new Car();
         int amount = 0;
         int payment = 0;
+        public static InventoryForm prevForm = new InventoryForm();
 
-        public BuyCarForm(Employee employee, Car car)
+        public BuyCarForm(Employee employee, Inventory inventory, InventoryForm inventoryForm)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             employeeCurrent = employee;
-            carCurrent = car;
+            inventoryCurrent = inventory;
+            carCurrent = inventoryCurrent.Car;
+            prevForm = inventoryForm;
         }
 
         private void amountTextBox_TextChanged(object sender, EventArgs e)
@@ -43,11 +48,20 @@ namespace Project
             }
             CompanyCarPurchaseInvoice invoice = new CompanyCarPurchaseInvoice(payment, employeeCurrent, amount, carCurrent);
             CompanyCarPurchaseInvoice.companyCarPurchaseInvoiceList.Add(invoice);
+            inventoryCurrent.Quantity += amount;
+            noButton_Click(sender, e);
         }
 
         private void noButton_Click(object sender, EventArgs e)
         {
+            this.Close();
+            prevForm.Show();
+        }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            prevForm.Show();    
         }
     }
 }

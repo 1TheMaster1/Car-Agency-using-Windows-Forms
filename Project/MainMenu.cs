@@ -13,13 +13,16 @@ namespace Project
     public partial class MainMenu : Form
     {
         Employee employeeCurrent = new Employee();
-        public static StartWindow prevStarWindow = new StartWindow();
+        bool check = true;
+        public static StartWindow prevForm = new StartWindow();
 
+        public MainMenu() { }
         public MainMenu(Employee employee, StartWindow startWindow)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             employeeCurrent = employee;
-            prevStarWindow = startWindow;
+            prevForm = startWindow;
             userLabel2.Text = employeeCurrent.Name + " (" + employeeCurrent.Authority + ")";
         }
 
@@ -27,8 +30,9 @@ namespace Project
         {
             if (employeeCurrent.Authority == "management")
             {
-                ManagementForm managementForm = new ManagementForm(employeeCurrent);
-                managementForm.Show();
+                ManagementForm managementForm = new ManagementForm(employeeCurrent, this);
+                this.Hide();
+                managementForm.ShowDialog();
             }
             else
             {
@@ -40,8 +44,9 @@ namespace Project
         {
             if (employeeCurrent.Authority == "management" || employeeCurrent.Authority == "sales")
             {
-                InventoryForm inventoryForm = new InventoryForm(employeeCurrent);
-                inventoryForm.Show();
+                InventoryForm inventoryForm = new InventoryForm(employeeCurrent, this);
+                this.Hide();
+                inventoryForm.ShowDialog();
             }
             else
             {
@@ -53,8 +58,9 @@ namespace Project
         {
             if (employeeCurrent.Authority == "management" || employeeCurrent.Authority == "finance")
             {
-                FinanceForm financeForm = new FinanceForm(employeeCurrent);
-                financeForm.Show();
+                FinanceForm financeForm = new FinanceForm(employeeCurrent, this);
+                this.Hide();
+                financeForm.ShowDialog();
             }
             else
             {
@@ -77,13 +83,22 @@ namespace Project
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            this.Close();
-            prevStarWindow.Show();
+            check = false;
+            this.Hide();
+            prevForm.Show();
         }
 
-        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            prevStarWindow.Show();
+            if (e.CloseReason == CloseReason.UserClosing && check)
+            {
+                if (MessageBox.Show("Close?", "Close", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+                e.Cancel = true;
+            }
+            check = true;
         }
     }
 }

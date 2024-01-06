@@ -19,8 +19,6 @@ namespace Project //Omar
             this.amount = amount;
             this.car = car;
             this.customer = customer;
-            if (employee is CommissionedSales)
-                commissionedSalesEmployee.NumberOfSales ++;
         }
     }
 }

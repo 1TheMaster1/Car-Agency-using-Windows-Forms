@@ -1,10 +1,11 @@
 namespace Project
 {
     public partial class StartWindow : Form
-    {
+    {        
         public StartWindow()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void passwordTextBox_TextChanged(object sender, EventArgs e)

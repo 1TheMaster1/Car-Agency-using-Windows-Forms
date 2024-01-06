@@ -268,6 +268,7 @@
             backButton.TabIndex = 26;
             backButton.Text = "Back";
             backButton.UseVisualStyleBackColor = true;
+            backButton.Click += backButton_Click;
             // 
             // resetButton
             // 

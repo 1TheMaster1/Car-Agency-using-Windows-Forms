@@ -15,12 +15,18 @@ namespace Project
     public partial class InventoryForm : Form
     {
         Employee employeeCurrent = new Employee();
+        Inventory inventoryObject = new Inventory();
+        bool check = true;
+        public static MainMenu prevForm = new MainMenu();
 
         public InventoryForm() { }
-        public InventoryForm(Employee employee)
+        public InventoryForm(Employee employee, MainMenu mainMenu)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             employeeCurrent = employee;
+            prevForm = mainMenu;    
+
             foreach (Inventory inventory in Inventory.inventoryList)
             {
                 searchComboBox.Items.Add(inventory.Car.Model);
@@ -29,7 +35,6 @@ namespace Project
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            Inventory inventoryObject = new Inventory();
             foreach (Inventory inventory in Inventory.inventoryList)
             {
                 if (searchComboBox.Text == inventory.Car.Model)
@@ -66,7 +71,7 @@ namespace Project
                             MessageBox.Show("There is an empty box");
                             return;
                         }
-                    } 
+                    }
                 }
             }
             string model = modelTextBox.Text;
@@ -90,28 +95,13 @@ namespace Project
 
         private void buyButton_Click(object sender, EventArgs e)
         {
-            Inventory inventoryObject = new Inventory();
-            foreach (Inventory inventory in Inventory.inventoryList)
-            {
-                if (searchComboBox.Text == inventory.Car.Model)
-                {
-                    inventoryObject = inventory;
-                }
-            }
-            inventoryObject.Quantity += Convert.ToInt32(amountTextBox.Text);
-
+            BuyCarForm buyCarForm = new BuyCarForm(employeeCurrent, inventoryObject, this);
+            this.Hide();
+            buyCarForm.ShowDialog();
         }
 
         private void sellButton_Click(object sender, EventArgs e)
         {
-            Inventory inventoryObject = new Inventory();
-            foreach (Inventory inventory in Inventory.inventoryList)
-            {
-                if (searchComboBox.Text == inventory.Car.Model)
-                {
-                    inventoryObject = inventory;
-                }
-            }
             SellCarForm sellCarForm = new SellCarForm(employeeCurrent, inventoryObject, this);
             this.Hide();
             sellCarForm.ShowDialog();
@@ -132,6 +122,26 @@ namespace Project
                 }
             }
             carPictureBox.Image = null;
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            check = false;
+            this.Hide();
+            prevForm.Show();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing && check)
+            {
+                if (MessageBox.Show("Close?", "Close", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+                e.Cancel = true;
+            }
+            check = true;
         }
     }
 }
