@@ -15,6 +15,8 @@ namespace Project
     public partial class InventoryForm : Form
     {
         Employee employeeCurrent = new Employee();
+
+        public InventoryForm() { }
         public InventoryForm(Employee employee)
         {
             InitializeComponent();
@@ -110,7 +112,9 @@ namespace Project
                     inventoryObject = inventory;
                 }
             }
-            inventoryObject.Quantity -= Convert.ToInt32(amountTextBox.Text);
+            SellCarForm sellCarForm = new SellCarForm(employeeCurrent, inventoryObject, this);
+            this.Hide();
+            sellCarForm.ShowDialog();
         }
 
         private void resetButton_Click(object sender, EventArgs e)

@@ -32,7 +32,6 @@ namespace Project //Hossam
         }
         public Car() { }
 
-        //properities to return values
         public string? Model { get { return model; } }
         public string? Make { get { return make; } }
         public string? Color { get { return color; } }

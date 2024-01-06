@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project //Omar
 {//class to access stock and update it
-    internal class Inventory
+    public class Inventory
     {
         string? id;
         Car car = new Car();

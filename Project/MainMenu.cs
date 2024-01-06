@@ -13,13 +13,13 @@ namespace Project
     public partial class MainMenu : Form
     {
         Employee employeeCurrent = new Employee();
-        public static StartWindow PrevStarWindow = new StartWindow();
+        public static StartWindow prevStarWindow = new StartWindow();
 
         public MainMenu(Employee employee, StartWindow startWindow)
         {
             InitializeComponent();
             employeeCurrent = employee;
-            PrevStarWindow = startWindow;
+            prevStarWindow = startWindow;
             userLabel2.Text = employeeCurrent.Name + " (" + employeeCurrent.Authority + ")";
         }
 
@@ -78,12 +78,12 @@ namespace Project
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            MainMenu.PrevStarWindow.Show();
+            prevStarWindow.Show();
         }
 
         private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MainMenu.PrevStarWindow.Show();
+            prevStarWindow.Show();
         }
     }
 }
