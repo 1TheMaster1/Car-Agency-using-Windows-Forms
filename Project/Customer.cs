@@ -28,11 +28,10 @@ namespace Project //Yamen
             totalPayment = 0;
         }
 
-        public void Purchase(int payment) //To update database with customer purchase
+        public void Purchase(int payment, int purchase) 
         {
-            //insert an update to the file here
             totalPayment += payment;
-            numberOfPurchase++;
+            numberOfPurchase += purchase;
         }
 
         public void Service(int payment) //To update database with customer paid service

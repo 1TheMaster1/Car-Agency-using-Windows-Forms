@@ -50,7 +50,6 @@
             addButton = new Button();
             buyButton = new Button();
             sellButton = new Button();
-            amountInStockLabel = new Label();
             amountTextBox = new TextBox();
             amountLabel = new Label();
             backButton = new Button();
@@ -217,7 +216,7 @@
             // 
             // addButton
             // 
-            addButton.Location = new Point(56, 368);
+            addButton.Location = new Point(56, 402);
             addButton.Name = "addButton";
             addButton.Size = new Size(94, 29);
             addButton.TabIndex = 20;
@@ -227,7 +226,7 @@
             // 
             // buyButton
             // 
-            buyButton.Location = new Point(56, 403);
+            buyButton.Location = new Point(56, 450);
             buyButton.Name = "buyButton";
             buyButton.Size = new Size(94, 29);
             buyButton.TabIndex = 21;
@@ -237,7 +236,7 @@
             // 
             // sellButton
             // 
-            sellButton.Location = new Point(56, 438);
+            sellButton.Location = new Point(198, 450);
             sellButton.Name = "sellButton";
             sellButton.Size = new Size(94, 29);
             sellButton.TabIndex = 22;
@@ -245,18 +244,9 @@
             sellButton.UseVisualStyleBackColor = true;
             sellButton.Click += sellButton_Click;
             // 
-            // amountInStockLabel
-            // 
-            amountInStockLabel.AutoSize = true;
-            amountInStockLabel.Location = new Point(452, 325);
-            amountInStockLabel.Name = "amountInStockLabel";
-            amountInStockLabel.Size = new Size(125, 20);
-            amountInStockLabel.TabIndex = 23;
-            amountInStockLabel.Text = "Amount in Stock :";
-            // 
             // amountTextBox
             // 
-            amountTextBox.Location = new Point(187, 403);
+            amountTextBox.Location = new Point(187, 351);
             amountTextBox.Name = "amountTextBox";
             amountTextBox.Size = new Size(125, 27);
             amountTextBox.TabIndex = 24;
@@ -264,15 +254,15 @@
             // amountLabel
             // 
             amountLabel.AutoSize = true;
-            amountLabel.Location = new Point(187, 368);
+            amountLabel.Location = new Point(56, 354);
             amountLabel.Name = "amountLabel";
-            amountLabel.Size = new Size(69, 20);
+            amountLabel.Size = new Size(125, 20);
             amountLabel.TabIndex = 25;
-            amountLabel.Text = "Amount :";
+            amountLabel.Text = "Amount in Stock :";
             // 
             // backButton
             // 
-            backButton.Location = new Point(657, 439);
+            backButton.Location = new Point(687, 453);
             backButton.Name = "backButton";
             backButton.Size = new Size(101, 26);
             backButton.TabIndex = 26;
@@ -281,7 +271,7 @@
             // 
             // resetButton
             // 
-            resetButton.Location = new Point(187, 436);
+            resetButton.Location = new Point(198, 402);
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(94, 29);
             resetButton.TabIndex = 27;
@@ -293,12 +283,11 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 486);
+            ClientSize = new Size(800, 503);
             Controls.Add(resetButton);
             Controls.Add(backButton);
             Controls.Add(amountLabel);
             Controls.Add(amountTextBox);
-            Controls.Add(amountInStockLabel);
             Controls.Add(sellButton);
             Controls.Add(buyButton);
             Controls.Add(addButton);
@@ -351,7 +340,6 @@
         private Button addButton;
         private Button buyButton;
         private Button sellButton;
-        private Label amountInStockLabel;
         private TextBox amountTextBox;
         private Label amountLabel;
         private Button backButton;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project //Hossam
 {//class for cars in stock 
-    internal class Car
+    public class Car
     {
         string? model;
         string? make;

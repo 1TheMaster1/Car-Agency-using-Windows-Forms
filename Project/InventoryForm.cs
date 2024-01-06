@@ -47,7 +47,7 @@ namespace Project
                 Bitmap image = new Bitmap(inventoryObject.Car.CarImage);
                 carPictureBox.Image = (Image)image;
             }
-            amountInStockLabel.Text = "Amount in stock : " + inventoryObject.Quantity;
+            amountTextBox.Text = inventoryObject.Quantity.ToString();
         }
 
         private void addButton_Click(object sender, EventArgs e)

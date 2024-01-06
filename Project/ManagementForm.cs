@@ -13,6 +13,7 @@ namespace Project
     public partial class ManagementForm : Form
     {
         Employee employeeCurrent = new Employee();
+
         public ManagementForm(Employee employee)
         {
             InitializeComponent();
@@ -73,9 +74,9 @@ namespace Project
         private void removeEmployeeButton_Click(object sender, EventArgs e)
         {
             int x = employeeDisplayList.SelectedIndex;
-            if (x > -1) 
-                Employee.employeeList.RemoveAt(x-1); 
-            else 
+            if (x > -1)
+                Employee.employeeList.RemoveAt(x - 1);
+            else
                 MessageBox.Show("Select an item");
 
             updateEmployeeButton_Click(sender, e);
@@ -105,9 +106,9 @@ namespace Project
         private void removeCustomerButton_Click(object sender, EventArgs e)
         {
             int x = customerDisplayList.SelectedIndex;
-            if (x > -1) 
-                Customer.customerList.RemoveAt(x-2); 
-            else 
+            if (x > -1)
+                Customer.customerList.RemoveAt(x - 2);
+            else
                 MessageBox.Show("Select an item");
 
             updateCustomerButton_Click(sender, e);

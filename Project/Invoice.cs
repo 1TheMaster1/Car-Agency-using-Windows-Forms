@@ -9,7 +9,26 @@ namespace Project //Omar
     internal class Invoice
     {
         int payment;
+        Sales? salaryEmployee;
+        protected CommissionedSales? commissionedSalesEmployee;
+        Technician? technicianEmployee;
+        Management? managementEmployee;
+        Finance? financeEmployee;
 
-        public int Payment { get { return payment; } set { payment = value; } }
+        public Invoice(int payment, Employee employee)
+        {
+            this.payment = payment;
+            if (employee is Sales)
+                salaryEmployee = (Sales)employee;
+            if (employee is CommissionedSales)
+                commissionedSalesEmployee = (CommissionedSales)employee;
+            if (employee is Technician)
+                technicianEmployee = (Technician)employee;
+            if (employee is Management)
+                managementEmployee = (Management)employee;
+            if (employee is Finance)
+                financeEmployee = (Finance)employee;
+        }
+        public Invoice() { }
     }
 }
