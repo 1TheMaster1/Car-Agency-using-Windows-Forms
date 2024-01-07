@@ -14,7 +14,7 @@ namespace Project
     {
         Employee employeeCurrent = new Employee();
         bool check = true;
-        public static MainMenu prevForm = new MainMenu();     
+        public static MainMenu prevForm = new MainMenu();
 
         public ManagementForm(Employee employee, MainMenu mainMenu)
         {
@@ -168,6 +168,11 @@ namespace Project
                 e.Cancel = true;
             }
             check = true;
+        }
+
+        private void jobComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
