@@ -16,8 +16,8 @@ namespace Project //Yamen
         {
             commission = 100;
         }
-        public CommissionedSales(string name, int age, int salary)
-            : base(name, age, salary) 
+        public CommissionedSales(int id, string name, int age, int salary)
+            : base(id, name, age, salary) 
         { 
             commission = 100;
         }

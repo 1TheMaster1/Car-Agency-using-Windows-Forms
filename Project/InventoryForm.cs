@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
+using System.Data.SqlClient;
+
+
+
+
 namespace Project
 {
     public partial class InventoryForm : Form
@@ -59,6 +64,15 @@ namespace Project
 
         private void addButton_Click(object sender, EventArgs e)
         {
+
+            string connetionString;
+            SqlConnection cnn;
+            connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+            cnn = new SqlConnection(connetionString);
+            cnn.Open();
+            MessageBox.Show("Connection Open  !");
+            cnn.Close();
+
             foreach (Control c in this.Controls)
             {
                 if (c is System.Windows.Forms.TextBox)

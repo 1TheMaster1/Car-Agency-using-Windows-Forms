@@ -23,12 +23,12 @@ namespace Project
             InitializeComponent();
             employeeCurrent = employee;
             prevForm = startWindow;
-            userLabel2.Text = employeeCurrent.Name + " (" + employeeCurrent.Authority + ")";
+            userLabel2.Text = employeeCurrent.Name + " (" + employeeCurrent.Role + ")";
         }
 
         private void managementButton_Click(object sender, EventArgs e)
         {
-            if (employeeCurrent.Authority == "management")
+            if (employeeCurrent.Role == "management")
             {
                 ManagementForm managementForm = new ManagementForm(employeeCurrent, this);
                 this.Hide();
@@ -42,7 +42,7 @@ namespace Project
 
         private void inventoryButton_Click(object sender, EventArgs e)
         {
-            if (employeeCurrent.Authority == "management" || employeeCurrent.Authority == "sales")
+            if (employeeCurrent.Role == "management" || employeeCurrent.Role == "sales")
             {
                 InventoryForm inventoryForm = new InventoryForm(employeeCurrent, this);
                 this.Hide();
@@ -56,7 +56,7 @@ namespace Project
 
         private void financeButton_Click(object sender, EventArgs e)
         {
-            if (employeeCurrent.Authority == "management" || employeeCurrent.Authority == "finance")
+            if (employeeCurrent.Role == "management" || employeeCurrent.Role == "finance")
             {
                 FinanceForm financeForm = new FinanceForm(employeeCurrent, this);
                 this.Hide();
@@ -70,7 +70,7 @@ namespace Project
 
         private void serviceButton_Click(object sender, EventArgs e)
         {
-            if (employeeCurrent.Authority == "management" || employeeCurrent.Authority == "technician")
+            if (employeeCurrent.Role == "management" || employeeCurrent.Role == "technician")
             {
                 ServiceForm serviceForm = new ServiceForm(employeeCurrent);
                 serviceForm.Show();

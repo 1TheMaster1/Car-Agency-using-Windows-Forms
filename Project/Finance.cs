@@ -10,8 +10,8 @@ namespace Project //Yamen
     {
         public Finance(string name, int age, int salary, string password)
            : base(name, age, salary, "finance", password) { }
-        public Finance(string name, int age, int salary)
-            :base(name, age, salary, "finance") { }
+        public Finance(int id, string name, int age, int salary)
+            :base(id, name, age, salary, "finance") { }
 
         public override int GetSalary()
         {

@@ -11,48 +11,44 @@ namespace Project //Yamen
 {//base class for all employees
     public class Employee
     {
-        string? id;
+        int id;
         string? name;
         int age;
         int salary;
-        static int count = 1000; //for creating IDs
-        string? authority;
+        string? role;
         string? password;
         public static List<Employee> employeeList = new List<Employee>();
 
-        public Employee(string name, int age, int salary, string authority, string password)
+        public Employee(string name, int age, int salary, string role, string password)
         {
-            id = count.ToString("0000");
             this.name = name;
             this.age = age;
             this.salary = salary;
-            this.authority = authority;
+            this.role = role;
             this.password = password;
-            count = count + 1;
         }
-        public Employee(string name, int age, int salary, string authority) 
+        public Employee(int id, string name, int age, int salary, string role) 
         {
-            id = count.ToString("0000");
+            this.id = id;
             this.name = name;
             this.age = age;
             this.salary = salary;
-            this.authority = authority;
-            password = id;
-            count = count + 1;
+            this.role = role;
+            password = id.ToString("0000");
         }
         public Employee(string name)
         {
-            id = "0000";
+            id = 0;
             this.name = name;
             age = 0;
             salary = 0;
-            authority = "management";
+            role = "management";
             password = "admin";
         }
         public Employee() { }
 
         public string? Name { get { return name; } }
-        public string? Authority {  get { return authority; } }
+        public string? Role {  get { return role; } }
         public string? Password { get { return password; } }
         public int Salary { get { return salary; } }
 
@@ -60,7 +56,7 @@ namespace Project //Yamen
 
         public override string ToString()
         {
-            return String.Format("{0}\t{1}\t{2}\t{3}\t{4}", id, name, age, salary, authority);
+            return String.Format("{0}\t{1}\t{2}\t{3}\t{4}", id, name, age, salary, role);
         }
     }
 }

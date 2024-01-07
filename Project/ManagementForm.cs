@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Reflection.Metadata;
 
 namespace Project
 {
@@ -26,40 +28,83 @@ namespace Project
 
         private void addEmployeeButton_Click(object sender, EventArgs e)
         {
+            int id = 0;
             string name = nameTextBox.Text;
             int age = Convert.ToInt32(ageTextBox.Text);
             int salary = Convert.ToInt32(salaryTextBox.Text);
+            string? role = null;
             Employee employee = new Employee();
 
             switch (jobComboBox.SelectedIndex)
             {
                 case 0:
-                    employee = new Management(name, age, salary);
-                    Employee.employeeList.Add(employee);
-                    MessageBox.Show("Added new \"management\"");
-                    break;
+                    role = "management"; break;
                 case 1:
-                    employee = new Sales(name, age, salary);
-                    Employee.employeeList.Add(employee);
-                    MessageBox.Show("Added new \"sales\"");
-                    break;
+                    role = "sales"; break;
                 case 2:
-                    employee = new CommissionedSales(name, age, salary);
-                    Employee.employeeList.Add(employee);
-                    MessageBox.Show("Added new \"commissioned sales\"");
-                    break;
+                    role = "sales"; break;
                 case 3:
-                    employee = new Finance(name, age, salary);
-                    Employee.employeeList.Add(employee);
-                    MessageBox.Show("Added new \"finance\"");
-                    break;
+                    role = "finance"; break;
                 case 4:
-                    employee = new Technician(name, age, salary);
-                    Employee.employeeList.Add(employee);
-                    MessageBox.Show("Added new \"technician\"");
-                    break;
+                    role = "technician"; break;
                 default:
                     MessageBox.Show("Choose a job"); break;
+            }
+            if (role != null)
+            {
+                string connetionString;
+                SqlConnection cnn;
+                connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+                cnn = new SqlConnection(connetionString);
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand("insert into Employees values (@empName,@empAge,@empSalary,@empRole)", cnn);
+                cmd.Parameters.AddWithValue("@empName", name);
+                cmd.Parameters.AddWithValue("@empAge", age);
+                cmd.Parameters.AddWithValue("@empSalary", salary);
+                cmd.Parameters.AddWithValue("@empRole", role);
+                cmd.ExecuteNonQuery();
+                string query = "SELECT TOP 1 * FROM Employees ORDER BY empID DESC";
+                SqlCommand cmdNew = new SqlCommand(query, cnn);
+                SqlDataReader reader = cmdNew.ExecuteReader();
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(reader.GetOrdinal("empID"));
+                }
+                cnn.Close();
+                MessageBox.Show("Gamed Gamed");
+                if (id != 0)
+                {
+                    switch (jobComboBox.SelectedIndex)
+                    {
+                        case 0:
+                            employee = new Management(id, name, age, salary);
+                            Employee.employeeList.Add(employee);
+                            MessageBox.Show("Added new \"management\"");
+                            break;
+                        case 1:
+                            employee = new Sales(0, name, age, salary);
+                            Employee.employeeList.Add(employee);
+                            MessageBox.Show("Added new \"sales\"");
+                            break;
+                        case 2:
+                            employee = new CommissionedSales(0, name, age, salary);
+                            Employee.employeeList.Add(employee);
+                            MessageBox.Show("Added new \"commissioned sales\"");
+                            break;
+                        case 3:
+                            employee = new Finance(0, name, age, salary);
+                            Employee.employeeList.Add(employee);
+                            MessageBox.Show("Added new \"finance\"");
+                            break;
+                        case 4:
+                            employee = new Technician(0, name, age, salary);
+                            Employee.employeeList.Add(employee);
+                            MessageBox.Show("Added new \"technician\"");
+                            break;
+                        default:
+                            MessageBox.Show("Choose a job"); break;
+                    }
+                }               
             }
         }
 
@@ -83,6 +128,8 @@ namespace Project
             else
                 MessageBox.Show("Select an item");
 
+            
+
             updateEmployeeButton_Click(sender, e);
         }
 
@@ -94,6 +141,21 @@ namespace Project
             Customer customer = new Customer(name, age, phone);
             Customer.customerList.Add(customer);
             MessageBox.Show("Added new \"customer\"");
+
+            string connetionString;
+            SqlConnection cnn;
+            connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+            cnn = new SqlConnection(connetionString);
+            cnn.Open();
+            SqlCommand cmd = new SqlCommand("insert into Customers values (@customerName,@customerAge,@customerPhone,@customerNOP, @customerTP)", cnn);
+            cmd.Parameters.AddWithValue("@customerName", name);
+            cmd.Parameters.AddWithValue("@customerAge", age);
+            cmd.Parameters.AddWithValue("@customerPhone", phone);
+            cmd.Parameters.AddWithValue("@customerTP", 0);
+            cmd.Parameters.AddWithValue("@customerNOP", 0);
+            cmd.ExecuteNonQuery();
+            cnn.Close();
+            MessageBox.Show("Gamed Gamed");
         }
 
         private void updateCustomerButton_Click(object sender, EventArgs e)

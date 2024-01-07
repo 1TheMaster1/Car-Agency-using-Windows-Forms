@@ -10,8 +10,8 @@ namespace Project //Yamen
     {
         public Technician(string name, int age, int salary, string password)
             : base(name, age, salary, "technician", password) { }
-        public Technician(string name, int age, int salary)
-            : base(name, age, salary, "technician") { }
+        public Technician(int id, string name, int age, int salary)
+            : base(id, name, age, salary, "technician") { }
 
         public override int GetSalary()
         {
