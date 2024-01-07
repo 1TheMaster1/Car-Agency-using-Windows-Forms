@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Reflection.Metadata;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
 
 namespace Project
 {
@@ -124,11 +126,21 @@ namespace Project
         {
             int x = employeeDisplayList.SelectedIndex;
             if (x > -1)
+            {
                 Employee.employeeList.RemoveAt(x - 1);
+                string connetionString;
+                SqlConnection cnn;
+                connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+                cnn = new SqlConnection(connetionString);
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand("Delete Employees where empID=@empID", cnn);
+                cmd.Parameters.AddWithValue("@empID", x - 1);
+                cmd.ExecuteNonQuery();
+                cnn.Close();
+                MessageBox.Show("Successfully Deleted");
+            }   
             else
                 MessageBox.Show("Select an item");
-
-            
 
             updateEmployeeButton_Click(sender, e);
         }
