@@ -38,7 +38,7 @@
             // 
             // yesButton
             // 
-            yesButton.Location = new Point(284, 311);
+            yesButton.Location = new Point(225, 225);
             yesButton.Name = "yesButton";
             yesButton.Size = new Size(94, 29);
             yesButton.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // noButton
             // 
-            noButton.Location = new Point(446, 311);
+            noButton.Location = new Point(344, 225);
             noButton.Name = "noButton";
             noButton.Size = new Size(94, 29);
             noButton.TabIndex = 1;
@@ -59,7 +59,7 @@
             // amountLabel
             // 
             amountLabel.AutoSize = true;
-            amountLabel.Location = new Point(165, 96);
+            amountLabel.Location = new Point(102, 70);
             amountLabel.Name = "amountLabel";
             amountLabel.Size = new Size(115, 20);
             amountLabel.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // amountTextBox
             // 
-            amountTextBox.Location = new Point(342, 96);
+            amountTextBox.Location = new Point(248, 67);
             amountTextBox.Name = "amountTextBox";
             amountTextBox.Size = new Size(125, 27);
             amountTextBox.TabIndex = 3;
@@ -76,7 +76,7 @@
             // proceedLabel
             // 
             proceedLabel.AutoSize = true;
-            proceedLabel.Location = new Point(135, 315);
+            proceedLabel.Location = new Point(102, 229);
             proceedLabel.Name = "proceedLabel";
             proceedLabel.Size = new Size(70, 20);
             proceedLabel.TabIndex = 4;
@@ -85,7 +85,7 @@
             // paymentLabel
             // 
             paymentLabel.AutoSize = true;
-            paymentLabel.Location = new Point(171, 188);
+            paymentLabel.Location = new Point(102, 148);
             paymentLabel.Name = "paymentLabel";
             paymentLabel.Size = new Size(109, 20);
             paymentLabel.TabIndex = 5;
@@ -95,7 +95,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(553, 290);
             Controls.Add(paymentLabel);
             Controls.Add(proceedLabel);
             Controls.Add(amountTextBox);

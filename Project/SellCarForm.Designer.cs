@@ -48,7 +48,7 @@
             // 
             // yesButton
             // 
-            yesButton.Location = new Point(130, 296);
+            yesButton.Location = new Point(241, 292);
             yesButton.Name = "yesButton";
             yesButton.Size = new Size(94, 29);
             yesButton.TabIndex = 1;
@@ -58,7 +58,7 @@
             // 
             // noButton
             // 
-            noButton.Location = new Point(261, 296);
+            noButton.Location = new Point(392, 292);
             noButton.Name = "noButton";
             noButton.Size = new Size(94, 29);
             noButton.TabIndex = 2;
@@ -69,7 +69,7 @@
             // amountLabel
             // 
             amountLabel.AutoSize = true;
-            amountLabel.Location = new Point(32, 105);
+            amountLabel.Location = new Point(28, 80);
             amountLabel.Name = "amountLabel";
             amountLabel.Size = new Size(113, 20);
             amountLabel.TabIndex = 3;
@@ -78,7 +78,7 @@
             // proceedLabel
             // 
             proceedLabel.AutoSize = true;
-            proceedLabel.Location = new Point(32, 296);
+            proceedLabel.Location = new Point(120, 296);
             proceedLabel.Name = "proceedLabel";
             proceedLabel.Size = new Size(74, 20);
             proceedLabel.TabIndex = 4;
@@ -86,7 +86,7 @@
             // 
             // amountTextBox
             // 
-            amountTextBox.Location = new Point(168, 102);
+            amountTextBox.Location = new Point(169, 77);
             amountTextBox.Name = "amountTextBox";
             amountTextBox.Size = new Size(125, 27);
             amountTextBox.TabIndex = 5;
@@ -95,7 +95,7 @@
             // paymentLabel
             // 
             paymentLabel.AutoSize = true;
-            paymentLabel.Location = new Point(32, 180);
+            paymentLabel.Location = new Point(28, 157);
             paymentLabel.Name = "paymentLabel";
             paymentLabel.Size = new Size(109, 20);
             paymentLabel.TabIndex = 6;
