@@ -92,7 +92,7 @@ namespace Project
             SqlDataReader reader4 = cmd4.ExecuteReader();
             while (reader4.Read())
             {
-                int invoiceCustomerID = reader4.GetInt32(reader4.GetOrdinal("invoiceCustomerID"));
+                int invoiceCustomerID = reader4.GetInt32(reader4.GetOrdinal("invoiceID"));
                 int empID = reader4.GetInt32(reader4.GetOrdinal("empID"));
                 int customerID = reader4.GetInt32(reader4.GetOrdinal("customerID"));
                 int carID = reader4.GetInt32(reader4.GetOrdinal("carID"));
@@ -113,7 +113,7 @@ namespace Project
                 }
             }
             cnn.Close();
-
+            
 
             ApplicationConfiguration.Initialize();
             Application.Run(new StartWindow());

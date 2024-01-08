@@ -59,10 +59,10 @@ namespace Project
                 MessageBox.Show("Type an amount");
                 return;
             }
-            int x = customerDisplayList.SelectedIndex;
-            int idcust = Customer.customerList[x - 2].ID;
+            int x = customerDisplayList.SelectedIndex;          
             if (x > -1)
             {
+                int idcust = Customer.customerList[x - 2].ID;
                 int custID = idcust;
                 int empID = employeeCurrent.ID;
                 int carID = carCurrent.ID;
@@ -75,19 +75,20 @@ namespace Project
                 connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
                 cnn = new SqlConnection(connetionString);
                 cnn.Open();
-                SqlCommand cmd = new SqlCommand("insert into Invoices values (@empID,@customerID,@carID, @invoiceTP, @invoiceType)", cnn);
+                SqlCommand cmd = new SqlCommand("insert into Invoices values (@invoiceID,@empID,@customerID,@carID, @invoiceTP, @invoiceType)", cnn);
+                cmd.Parameters.AddWithValue("@invoiceID", GetMaxPrimaryKeyValue(connetionString,"Invoices","invoiceID")+1);
                 cmd.Parameters.AddWithValue("@empID", empID);
                 cmd.Parameters.AddWithValue("@customerID", custID);
                 cmd.Parameters.AddWithValue("@carID", carID);
                 cmd.Parameters.AddWithValue("@invoiceTP", invoiceTP);
                 cmd.Parameters.AddWithValue("@invoiceType", invoiceType);
                 cmd.ExecuteNonQuery();
-                string query = "SELECT TOP 1 * FROM Invoices ORDER BY invoiceCustomerID DESC";
+                string query = "SELECT TOP 1 * FROM Invoices ORDER BY invoiceID DESC";
                 SqlCommand cmdNew = new SqlCommand(query, cnn);
                 SqlDataReader reader = cmdNew.ExecuteReader();
                 while (reader.Read())
                 {
-                    id = reader.GetInt32(reader.GetOrdinal("invoiceCustomerID"));
+                    id = reader.GetInt32(reader.GetOrdinal("invoiceID"));
                 }
                 cnn.Close();
                 
