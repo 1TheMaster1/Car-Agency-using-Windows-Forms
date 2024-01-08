@@ -80,12 +80,15 @@ namespace Project
         {
             foreach (Invoice invoice in CustomerCarPurchaseInvoice.customerCarPurchaseInvoiceList)       
                 sales += invoice.Payment;            
-            foreach (Invoice invoice in ServicePurchaseInvoice.servicePurchaseInvoiceList)           
-                service += invoice.Payment;           
-            foreach (Invoice invoice in SalaryInvoice.salaryInvoiceList)            
-                salaries += invoice.Payment;            
+            //foreach (Invoice invoice in ServicePurchaseInvoice.servicePurchaseInvoiceList)           
+                //service += invoice.Payment;           
+            //foreach (Invoice invoice in SalaryInvoice.salaryInvoiceList)            
+                //salaries += invoice.Payment;
             foreach (Invoice invoice in CompanyCarPurchaseInvoice.companyCarPurchaseInvoiceList)            
-                carCosts += invoice.Payment;            
+                carCosts += invoice.Payment;
+            foreach (Employee employee in Employee.employeeList)
+                salaries += employee.GetSalary();
+            service = ServicePurchaseInvoice.payment;
             rent = 10000;
             int random = new Random().Next(1000, 10000);
             other = random;

@@ -30,20 +30,19 @@
         {
             Serviecs = new TabControl();
             tabPage1 = new TabPage();
-            Amount = new Label();
             payNowButton = new Button();
-            label5 = new Label();
-            HoursTextBox = new TextBox();
-            label4 = new Label();
-            label3 = new Label();
-            PackageDescriptionTextBox = new RichTextBox();
-            label2 = new Label();
-            label1 = new Label();
+            paymentAmountLabel = new Label();
+            hoursTextBox = new TextBox();
+            amountOfHoursLabel = new Label();
+            descriptionLabel = new Label();
+            packageDescriptionTextBox = new RichTextBox();
+            washPackageLabel = new Label();
+            carTypeLabel = new Label();
             washPackageComboBox = new ComboBox();
-            carTypecomboBox = new ComboBox();
+            carTypeComboBox = new ComboBox();
             tabPage2 = new TabPage();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             label6 = new Label();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             backButton = new Button();
             Serviecs.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -62,17 +61,16 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(Amount);
             tabPage1.Controls.Add(payNowButton);
-            tabPage1.Controls.Add(label5);
-            tabPage1.Controls.Add(HoursTextBox);
-            tabPage1.Controls.Add(label4);
-            tabPage1.Controls.Add(label3);
-            tabPage1.Controls.Add(PackageDescriptionTextBox);
-            tabPage1.Controls.Add(label2);
-            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(paymentAmountLabel);
+            tabPage1.Controls.Add(hoursTextBox);
+            tabPage1.Controls.Add(amountOfHoursLabel);
+            tabPage1.Controls.Add(descriptionLabel);
+            tabPage1.Controls.Add(packageDescriptionTextBox);
+            tabPage1.Controls.Add(washPackageLabel);
+            tabPage1.Controls.Add(carTypeLabel);
             tabPage1.Controls.Add(washPackageComboBox);
-            tabPage1.Controls.Add(carTypecomboBox);
+            tabPage1.Controls.Add(carTypeComboBox);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -81,19 +79,9 @@
             tabPage1.Text = "Car Washes";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // Amount
-            // 
-            Amount.AutoSize = true;
-            Amount.Location = new Point(113, 187);
-            Amount.Name = "Amount";
-            Amount.Size = new Size(51, 15);
-            Amount.TabIndex = 11;
-            Amount.Text = "Amount";
-            Amount.Click += Amount_Click;
-            // 
             // payNowButton
             // 
-            payNowButton.Location = new Point(152, 248);
+            payNowButton.Location = new Point(64, 229);
             payNowButton.Name = "payNowButton";
             payNowButton.Size = new Size(75, 23);
             payNowButton.TabIndex = 10;
@@ -101,87 +89,86 @@
             payNowButton.UseVisualStyleBackColor = true;
             payNowButton.Click += payNowButton_Click;
             // 
-            // label5
+            // paymentAmountLabel
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(6, 187);
-            label5.Name = "label5";
-            label5.Size = new Size(110, 15);
-            label5.TabIndex = 8;
-            label5.Text = "Payment Amount : ";
+            paymentAmountLabel.AutoSize = true;
+            paymentAmountLabel.Location = new Point(6, 172);
+            paymentAmountLabel.Name = "paymentAmountLabel";
+            paymentAmountLabel.Size = new Size(110, 15);
+            paymentAmountLabel.TabIndex = 8;
+            paymentAmountLabel.Text = "Payment Amount : ";
             // 
-            // HoursTextBox
+            // hoursTextBox
             // 
-            HoursTextBox.Location = new Point(48, 156);
-            HoursTextBox.Name = "HoursTextBox";
-            HoursTextBox.Size = new Size(179, 23);
-            HoursTextBox.TabIndex = 7;
-            HoursTextBox.TextChanged += HoursTextBox_TextChanged;
+            hoursTextBox.Location = new Point(113, 132);
+            hoursTextBox.Name = "hoursTextBox";
+            hoursTextBox.Size = new Size(90, 23);
+            hoursTextBox.TabIndex = 7;
+            hoursTextBox.TextChanged += HoursTextBox_TextChanged;
             // 
-            // label4
+            // amountOfHoursLabel
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(6, 135);
-            label4.Name = "label4";
-            label4.Size = new Size(104, 15);
-            label4.TabIndex = 6;
-            label4.Text = "Amount of hours :";
+            amountOfHoursLabel.AutoSize = true;
+            amountOfHoursLabel.Location = new Point(6, 135);
+            amountOfHoursLabel.Name = "amountOfHoursLabel";
+            amountOfHoursLabel.Size = new Size(106, 15);
+            amountOfHoursLabel.TabIndex = 6;
+            amountOfHoursLabel.Text = "Amount of Hours :";
             // 
-            // label3
+            // descriptionLabel
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(247, 114);
-            label3.Name = "label3";
-            label3.Size = new Size(145, 15);
-            label3.TabIndex = 5;
-            label3.Text = "Wash package description";
+            descriptionLabel.AutoSize = true;
+            descriptionLabel.Location = new Point(247, 114);
+            descriptionLabel.Name = "descriptionLabel";
+            descriptionLabel.Size = new Size(146, 15);
+            descriptionLabel.TabIndex = 5;
+            descriptionLabel.Text = "Wash Package Description";
             // 
-            // PackageDescriptionTextBox
+            // packageDescriptionTextBox
             // 
-            PackageDescriptionTextBox.Location = new Point(247, 132);
-            PackageDescriptionTextBox.Name = "PackageDescriptionTextBox";
-            PackageDescriptionTextBox.Size = new Size(266, 139);
-            PackageDescriptionTextBox.TabIndex = 4;
-            PackageDescriptionTextBox.Text = "";
-            PackageDescriptionTextBox.TextChanged += PackageDescriptionTextBox_TextChanged;
+            packageDescriptionTextBox.Location = new Point(247, 132);
+            packageDescriptionTextBox.Name = "packageDescriptionTextBox";
+            packageDescriptionTextBox.Size = new Size(266, 139);
+            packageDescriptionTextBox.TabIndex = 4;
+            packageDescriptionTextBox.Text = "";
             // 
-            // label2
+            // washPackageLabel
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(38, 79);
-            label2.Name = "label2";
-            label2.Size = new Size(83, 15);
-            label2.TabIndex = 3;
-            label2.Text = "Wash Package";
+            washPackageLabel.AutoSize = true;
+            washPackageLabel.Location = new Point(38, 79);
+            washPackageLabel.Name = "washPackageLabel";
+            washPackageLabel.Size = new Size(89, 15);
+            washPackageLabel.TabIndex = 3;
+            washPackageLabel.Text = "Wash Package :";
             // 
-            // label1
+            // carTypeLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(48, 39);
-            label1.Name = "label1";
-            label1.Size = new Size(52, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Car Type";
+            carTypeLabel.AutoSize = true;
+            carTypeLabel.Location = new Point(48, 39);
+            carTypeLabel.Name = "carTypeLabel";
+            carTypeLabel.Size = new Size(58, 15);
+            carTypeLabel.TabIndex = 2;
+            carTypeLabel.Text = "Car Type :";
             // 
             // washPackageComboBox
             // 
             washPackageComboBox.FormattingEnabled = true;
-            washPackageComboBox.Items.AddRange(new object[] { "Normal Package", "Lauxary Package", "Deluex Package" });
+            washPackageComboBox.Items.AddRange(new object[] { "Normal Package", "Luxury Package", "Deluxe Package" });
             washPackageComboBox.Location = new Point(171, 76);
             washPackageComboBox.Name = "washPackageComboBox";
             washPackageComboBox.Size = new Size(342, 23);
             washPackageComboBox.TabIndex = 1;
             washPackageComboBox.SelectedIndexChanged += washPackageComboBox_SelectedIndexChanged;
             // 
-            // carTypecomboBox
+            // carTypeComboBox
             // 
-            carTypecomboBox.FormattingEnabled = true;
-            carTypecomboBox.Items.AddRange(new object[] { "Mini Car", "Hatch Back", "Sedan", "SUV", "Sports Car" });
-            carTypecomboBox.Location = new Point(171, 36);
-            carTypecomboBox.Name = "carTypecomboBox";
-            carTypecomboBox.Size = new Size(342, 23);
-            carTypecomboBox.TabIndex = 0;
-            carTypecomboBox.SelectedIndexChanged += carTypecomboBox_SelectedIndexChanged;
+            carTypeComboBox.FormattingEnabled = true;
+            carTypeComboBox.Items.AddRange(new object[] { "Mini ", "Hatch Back", "Sedan", "SUV", "Sports" });
+            carTypeComboBox.Location = new Point(171, 36);
+            carTypeComboBox.Name = "carTypeComboBox";
+            carTypeComboBox.Size = new Size(342, 23);
+            carTypeComboBox.TabIndex = 0;
+            carTypeComboBox.SelectedIndexChanged += carTypecomboBox_SelectedIndexChanged;
             // 
             // tabPage2
             // 
@@ -237,17 +224,16 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private ComboBox washPackageComboBox;
-        private ComboBox carTypecomboBox;
-        private RichTextBox PackageDescriptionTextBox;
-        private Label label2;
-        private Label label1;
+        private ComboBox carTypeComboBox;
+        private RichTextBox packageDescriptionTextBox;
+        private Label washPackageLabel;
+        private Label carTypeLabel;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private TextBox HoursTextBox;
-        private Label label4;
-        private Label label3;
+        private TextBox hoursTextBox;
+        private Label amountOfHoursLabel;
+        private Label descriptionLabel;
         private Button payNowButton;
-        private Label label5;
-        private Label Amount;
+        private Label paymentAmountLabel;
         private Label label6;
         private Button backButton;
     }

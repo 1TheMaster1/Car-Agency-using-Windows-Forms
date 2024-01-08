@@ -8,6 +8,7 @@ namespace Project //Omar
 {//inherits from Invoice and made for customer service purchase
     internal class ServicePurchaseInvoice : Invoice
     {
+        public static int payment = 0;               //random
         int id;
         Customer? customer;
         public static List<ServicePurchaseInvoice> servicePurchaseInvoiceList = new List<ServicePurchaseInvoice>();
