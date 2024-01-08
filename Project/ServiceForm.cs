@@ -18,16 +18,15 @@ namespace Project
         int hours = 0;
         double carTypeRate;
         double washPackageRate;
+        bool check = true;
+        public static MainMenu prevForm = new MainMenu();
 
-
-
-
-
-        public ServiceForm(Employee employee)
+        public ServiceForm(Employee employee, MainMenu mainMenu)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             employeeCurrent = employee;
+            prevForm = mainMenu;
         }
 
         private void carTypecomboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,6 +79,26 @@ namespace Project
 
         private void Amount_Click(object sender, EventArgs e)
         {
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            check = false;
+            this.Hide();
+            prevForm.Show();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing && check)
+            {
+                if (MessageBox.Show("Close?", "Close", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+                e.Cancel = true;
+            }
+            check = true;
         }
     }
 }

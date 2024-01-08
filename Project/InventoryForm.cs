@@ -195,5 +195,9 @@ namespace Project
             }
         }
 
+        private void searchComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            searchButton_Click(sender, e);
+        }
     }
 }

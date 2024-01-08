@@ -72,7 +72,7 @@ namespace Project
         {
             if (employeeCurrent.Role == "management" || employeeCurrent.Role == "technician")
             {
-                ServiceForm serviceForm = new ServiceForm(employeeCurrent);
+                ServiceForm serviceForm = new ServiceForm(employeeCurrent, this);
                 serviceForm.Show();
             }
             else

@@ -224,6 +224,7 @@
             searchComboBox.Name = "searchComboBox";
             searchComboBox.Size = new Size(227, 23);
             searchComboBox.TabIndex = 19;
+            searchComboBox.SelectedIndexChanged += searchComboBox_SelectedIndexChanged;
             // 
             // addButton
             // 

@@ -43,8 +43,11 @@
             carTypecomboBox = new ComboBox();
             tabPage2 = new TabPage();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            label6 = new Label();
+            backButton = new Button();
             Serviecs.SuspendLayout();
             tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // Serviecs
@@ -182,6 +185,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(label6);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -190,17 +194,40 @@
             tabPage2.Text = "Car Mantinance";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("SquareFont", 36F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Location = new Point(54, 103);
+            label6.Name = "label6";
+            label6.Size = new Size(419, 50);
+            label6.TabIndex = 0;
+            label6.Text = "Coming Soon.........";
+            // 
+            // backButton
+            // 
+            backButton.Location = new Point(474, 334);
+            backButton.Name = "backButton";
+            backButton.Size = new Size(75, 23);
+            backButton.TabIndex = 12;
+            backButton.Text = "Back";
+            backButton.UseVisualStyleBackColor = true;
+            backButton.Click += backButton_Click;
+            // 
             // ServiceForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(566, 333);
+            ClientSize = new Size(566, 367);
+            Controls.Add(backButton);
             Controls.Add(Serviecs);
             Name = "ServiceForm";
             Text = "ServiceForm";
             Serviecs.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -221,5 +248,7 @@
         private Button payNowButton;
         private Label label5;
         private Label Amount;
+        private Label label6;
+        private Button backButton;
     }
 }
