@@ -26,8 +26,6 @@ namespace Project
         }
         private void loginButton_Click(object sender, EventArgs e)
         {
-
-
             foreach (Employee employee in Employee.employeeList.ToList())
             {
                 if (NameTextBox.Text == employee.Name && passwordTextBox.Text == employee.Password)

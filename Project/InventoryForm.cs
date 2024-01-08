@@ -64,44 +64,50 @@ namespace Project
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            foreach (Control c in this.Controls)
+            try
             {
-                if (c is System.Windows.Forms.TextBox)
+                if (Convert.ToInt32(horsePowerTextBox.Text) <= 0 || Convert.ToInt32(purchasePriceTextBox.Text) <= 0 || Convert.ToInt32(sellingPriceTextBox.Text) <= 0 || Convert.ToInt32(amountTextBox.Text) <= 0)
+                    throw new NegativeNumberException();
+                foreach (Control c in this.Controls)
                 {
-                    System.Windows.Forms.TextBox? textBox = c as System.Windows.Forms.TextBox;
-                    if (textBox != null)
+                    if (c is System.Windows.Forms.TextBox)
                     {
-                        if (textBox.Text == string.Empty)
-                        {
-                            MessageBox.Show("There is an empty box");
-                            return;
-                        }
+                        System.Windows.Forms.TextBox? textBox = c as System.Windows.Forms.TextBox;
+                        if (textBox != null)                       
+                            if (textBox.Text == string.Empty)
+                            {
+                                throw new EmptyCellException();
+                            }
                     }
                 }
-            }
-            string model = modelTextBox.Text;
-            string make = makeTextBox.Text;
-            string color = colorTextBox.Text;
-            int horsePower = Convert.ToInt32(horsePowerTextBox.Text);
-            string type = typeTextBox.Text;
-            int purchasePrice = Convert.ToInt32(purchasePriceTextBox.Text);
-            int sellingPrice = Convert.ToInt32(sellingPriceTextBox.Text);
-            Bitmap carImage = new Bitmap(carImageTextBox.Text);
-            Car car = new Car(0, model, make, color, horsePower, type, purchasePrice, sellingPrice, carImage);
-            int quantity = Convert.ToInt32(amountTextBox.Text);
-            Inventory inventory = new Inventory(0, car, quantity);
-            Inventory.inventoryList.Add(inventory);
-            searchComboBox.Items.Clear();
-            foreach (Inventory inventoryObject in Inventory.inventoryList)
-            {
-                searchComboBox.Items.Add(inventoryObject.Car.Model);
-            }
+                string model = modelTextBox.Text;
+                string make = makeTextBox.Text;
+                string color = colorTextBox.Text;
+                int horsePower = Convert.ToInt32(horsePowerTextBox.Text);
+                string type = typeTextBox.Text;
+                int purchasePrice = Convert.ToInt32(purchasePriceTextBox.Text);
+                int sellingPrice = Convert.ToInt32(sellingPriceTextBox.Text);
+                Bitmap carImage = new Bitmap(carImageTextBox.Text);
+                Car car = new Car(0, model, make, color, horsePower, type, purchasePrice, sellingPrice, carImage);
+                int quantity = Convert.ToInt32(amountTextBox.Text);
+                Inventory inventory = new Inventory(0, car, quantity);
+                Inventory.inventoryList.Add(inventory);
+                searchComboBox.Items.Clear();
+                foreach (Inventory inventoryObject in Inventory.inventoryList)
+                {
+                    searchComboBox.Items.Add(inventoryObject.Car.Model);
+                }
 
-            string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
-            string tableName = "Cars";
-            string primaryKeyColumnName = "carID";
-            int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
-            InsertNewRecord(model, make, color, horsePower, type, purchasePrice, sellingPrice, carImageTextBox.Text, quantity, connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);
+                string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+                string tableName = "Cars";
+                string primaryKeyColumnName = "carID";
+                int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
+                InsertNewRecord(model, make, color, horsePower, type, purchasePrice, sellingPrice, carImageTextBox.Text, quantity, connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void buyButton_Click(object sender, EventArgs e)

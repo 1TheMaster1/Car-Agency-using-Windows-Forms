@@ -30,35 +30,56 @@ namespace Project
 
         private void addEmployeeButton_Click(object sender, EventArgs e)
         {
-            int id = 0;
-            int x = jobComboBox.SelectedIndex;
-            string name = nameTextBox.Text;
-            int age = Convert.ToInt32(ageTextBox.Text);
-            int salary = Convert.ToInt32(salaryTextBox.Text);
-            string? role = null;
+            try
+            {   if(Convert.ToInt32(ageTextBox.Text) <= 0 || Convert.ToInt32(salaryTextBox.Text) <= 0)
+                    throw new NegativeNumberException();
+                foreach (Control c in employeeGroupBox.Controls)
+                {
+                    if (c is System.Windows.Forms.TextBox)
+                    {
+                        System.Windows.Forms.TextBox? textBox = c as System.Windows.Forms.TextBox;
+                        if (textBox != null)
+                            if (textBox.Text == string.Empty)
+                            {
+                                throw new EmptyCellException();
+                            }
+                    }
+                }
+                int id = 0;
+                int x = jobComboBox.SelectedIndex;
+                string name = nameTextBox.Text;
+                int age = Convert.ToInt32(ageTextBox.Text);
+                int salary = Convert.ToInt32(salaryTextBox.Text);
+                string? role = null;
 
-            switch (x)
-            {
-                case 0:
-                    role = "management"; break;
-                case 1:
-                    role = "sales"; break;
-                case 2:
-                    role = "sales"; break;
-                case 3:
-                    role = "finance"; break;
-                case 4:
-                    role = "technician"; break;
-                default:
-                    MessageBox.Show("Choose a job"); break;
+                switch (x)
+                {
+                    case 0:
+                        role = "management"; break;
+                    case 1:
+                        role = "sales"; break;
+                    case 2:
+                        role = "sales"; break;
+                    case 3:
+                        role = "finance"; break;
+                    case 4:
+                        role = "technician"; break;
+                    default:
+                        MessageBox.Show("Choose a job"); break;
+                }
+
+                string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+                string tableName = "Employees";
+                string primaryKeyColumnName = "empID";
+                int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
+                if (role != null)
+                    InsertNewRecordEmployee(id, x, name, age, salary, role, connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);
             }
-
-            string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
-            string tableName = "Employees";
-            string primaryKeyColumnName = "empID";
-            int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
-            if (role != null) 
-                InsertNewRecordEmployee(id, x, name, age, salary, role, connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void updateEmployeeButton_Click(object sender, EventArgs e)
@@ -99,15 +120,36 @@ namespace Project
 
         private void addCustomerButton_Click(object sender, EventArgs e)
         {
-            string name = customerNameTextBox.Text;
-            int age = Convert.ToInt32(customerAgeTextBox.Text);
-            string phone = customerNumberTextBox.Text;
+            try
+            {
+                if (Convert.ToInt32(customerAgeTextBox.Text) <= 0)
+                    throw new NegativeNumberException();
+                foreach (Control c in customerGroupBox.Controls)
+                {
+                    if (c is System.Windows.Forms.TextBox)
+                    {
+                        System.Windows.Forms.TextBox? textBox = c as System.Windows.Forms.TextBox;
+                        if (textBox != null)
+                            if (textBox.Text == string.Empty)
+                            {
+                                throw new EmptyCellException();
+                            }
+                    }
+                }
+                string name = customerNameTextBox.Text;
+                int age = Convert.ToInt32(customerAgeTextBox.Text);
+                string phone = customerNumberTextBox.Text;
 
-            string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
-            string tableName = "Customers";
-            string primaryKeyColumnName = "customerID";
-            int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
-            InsertNewRecordCustomer(name,age,phone,connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);           
+                string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+                string tableName = "Customers";
+                string primaryKeyColumnName = "customerID";
+                int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
+                InsertNewRecordCustomer(name, age, phone, connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }     
         }
 
         private void updateCustomerButton_Click(object sender, EventArgs e)

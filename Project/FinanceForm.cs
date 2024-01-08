@@ -35,45 +35,62 @@ namespace Project
 
         private void inputButton_Click(object sender, EventArgs e)
         {
-            foreach (Control c in revenueGroupBox.Controls)
+            try
             {
-                if (c is System.Windows.Forms.TextBox)
+                foreach (Control c in revenueGroupBox.Controls)
                 {
-                    System.Windows.Forms.TextBox? textBox = c as System.Windows.Forms.TextBox;
-                    if (textBox != null)
-                        if (textBox.Text == string.Empty)
+                    if (c is System.Windows.Forms.TextBox)
+                    {
+                        System.Windows.Forms.TextBox? textBox = c as System.Windows.Forms.TextBox;
+                        if (textBox != null)
                         {
-                            MessageBox.Show("There's an empty field");
-                                return;
-                        }
+                            if (textBox.Text == string.Empty)
+                            {
+                                throw new EmptyCellException();
+                            }
+                            if (Convert.ToInt32(textBox.Text) <= 0)
+                            {
+                                throw new NegativeNumberException();
+                            }
+                        }                            
+                    }
                 }
-            }
-            foreach (Control c in expensesGroupBox.Controls)
-            {
-                if (c is System.Windows.Forms.TextBox)
+                foreach (Control c in expensesGroupBox.Controls)
                 {
-                    System.Windows.Forms.TextBox? textBox = c as System.Windows.Forms.TextBox;
-                    if (textBox != null)
-                        if (textBox.Text == string.Empty)
+                    if (c is System.Windows.Forms.TextBox)
+                    {
+                        System.Windows.Forms.TextBox? textBox = c as System.Windows.Forms.TextBox;
+                        if (textBox != null)
                         {
-                            MessageBox.Show("There's an empty field");
-                            return;
+                            if (textBox.Text == string.Empty)
+                            {
+                                throw new EmptyCellException();
+                            }
+                            if (Convert.ToInt32(textBox.Text) <= 0)
+                            {
+                                throw new NegativeNumberException();
+                            }
                         }
+                    }
                 }
-            }
-            sales = Convert.ToInt32(salesTextBox.Text);
-            service = Convert.ToInt32(serviceTextBox.Text);
-            salaries = Convert.ToInt32(salariesTextBox.Text);
-            carCosts = Convert.ToInt32(carCostsTextBox.Text);
-            rent = Convert.ToInt32(rentTextBox.Text);
-            other = Convert.ToInt32(otherTextBox.Text);
+                sales = Convert.ToInt32(salesTextBox.Text);
+                service = Convert.ToInt32(serviceTextBox.Text);
+                salaries = Convert.ToInt32(salariesTextBox.Text);
+                carCosts = Convert.ToInt32(carCostsTextBox.Text);
+                rent = Convert.ToInt32(rentTextBox.Text);
+                other = Convert.ToInt32(otherTextBox.Text);
 
-            revenue = sales + service;
-            expenses = salaries + carCosts + rent + other;
-            profit = revenue - expenses;
-            revenueLabel.Text = "Total Revenue : " + revenue;
-            expensesLabel.Text = "Total Expenses : " + expenses;
-            profitLabel.Text = "Profit Amount : " + profit;
+                revenue = sales + service;
+                expenses = salaries + carCosts + rent + other;
+                profit = revenue - expenses;
+                revenueLabel.Text = "Total Revenue : " + revenue;
+                expensesLabel.Text = "Total Expenses : " + expenses;
+                profitLabel.Text = "Profit Amount : " + profit;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void databaseButton_Click(object sender, EventArgs e)
