@@ -97,24 +97,11 @@ namespace Project
                 searchComboBox.Items.Add(inventoryObject.Car.Model);
             }
 
-            string connetionString;
-            SqlConnection cnn;
-            connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
-            SqlCommand cmd = new SqlCommand("insert into Cars values (@carModel,@carMake,@carColor,@carHP,@carType,@carPP,@carSP,@carImage,@carStock)", cnn);
-            cmd.Parameters.AddWithValue("@carModel", model);
-            cmd.Parameters.AddWithValue("@carMake", make);
-            cmd.Parameters.AddWithValue("@carColor", color);
-            cmd.Parameters.AddWithValue("@carHP", horsePower);
-            cmd.Parameters.AddWithValue("@carType", type);
-            cmd.Parameters.AddWithValue("@carPP", purchasePrice);
-            cmd.Parameters.AddWithValue("@carSP", sellingPrice);
-            cmd.Parameters.AddWithValue("@carImage", carImageTextBox.Text);
-            cmd.Parameters.AddWithValue("@carStock", quantity);
-            cmd.ExecuteNonQuery();
-            cnn.Close();
-            MessageBox.Show("Successfully Added");
+            string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+            string tableName = "Cars";
+            string primaryKeyColumnName = "carID";
+            int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
+            InsertNewRecord(model, make, color, horsePower, type, purchasePrice, sellingPrice, carImageTextBox.Text, quantity, connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);
         }
 
         private void buyButton_Click(object sender, EventArgs e)
@@ -182,7 +169,7 @@ namespace Project
                 }
             }
         }
-        static void InsertNewRecord(string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
+        static void InsertNewRecord(string model, string make, string color, int horsePower, string type, int purchasePrice, int sellingPrice, string carImage, int quantity, string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -192,8 +179,18 @@ namespace Project
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Execute the INSERT command
-                    command.ExecuteNonQuery();
+                    SqlCommand cmd = new SqlCommand("insert into Cars values (@carID,@carModel,@carMake,@carColor,@carHP,@carType,@carPP,@carSP,@carImage,@carStock)", connection);
+                    cmd.Parameters.AddWithValue("@carID", newPrimaryKeyValue);
+                    cmd.Parameters.AddWithValue("@carModel", model);
+                    cmd.Parameters.AddWithValue("@carMake", make);
+                    cmd.Parameters.AddWithValue("@carColor", color);
+                    cmd.Parameters.AddWithValue("@carHP", horsePower);
+                    cmd.Parameters.AddWithValue("@carType", type);
+                    cmd.Parameters.AddWithValue("@carPP", purchasePrice);
+                    cmd.Parameters.AddWithValue("@carSP", sellingPrice);
+                    cmd.Parameters.AddWithValue("@carImage", carImage);
+                    cmd.Parameters.AddWithValue("@carStock", quantity);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

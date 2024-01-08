@@ -36,9 +36,8 @@ namespace Project
             int age = Convert.ToInt32(ageTextBox.Text);
             int salary = Convert.ToInt32(salaryTextBox.Text);
             string? role = null;
-            Employee employee = new Employee();
 
-            switch (jobComboBox.SelectedIndex)
+            switch (x)
             {
                 case 0:
                     role = "management"; break;
@@ -53,61 +52,13 @@ namespace Project
                 default:
                     MessageBox.Show("Choose a job"); break;
             }
-            if (role != null)
-            {
-                string connetionString;
-                SqlConnection cnn;
-                connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
-                cnn = new SqlConnection(connetionString);
-                cnn.Open();
-                SqlCommand cmd = new SqlCommand("insert into Employees values (@empName,@empAge,@empSalary,@empRole)", cnn);
-                cmd.Parameters.AddWithValue("@empName", name);
-                cmd.Parameters.AddWithValue("@empAge", age);
-                cmd.Parameters.AddWithValue("@empSalary", salary);
-                cmd.Parameters.AddWithValue("@empRole", role);
-                cmd.ExecuteNonQuery();
-                string query = "SELECT TOP 1 * FROM Employees ORDER BY empID DESC";
-                SqlCommand cmdNew = new SqlCommand(query, cnn);
-                SqlDataReader reader = cmdNew.ExecuteReader();
-                while (reader.Read())
-                {
-                    id = reader.GetInt32(reader.GetOrdinal("empID"));
-                }
-                cnn.Close();
-                if (id != 0)
-                {
-                    switch (jobComboBox.SelectedIndex)
-                    {
-                        case 0:
-                            employee = new Management(id, name, age, salary);
-                            Employee.employeeList.Add(employee);
-                            MessageBox.Show("Added new \"management\"");
-                            break;
-                        case 1:
-                            employee = new Sales(0, name, age, salary);
-                            Employee.employeeList.Add(employee);
-                            MessageBox.Show("Added new \"sales\"");
-                            break;
-                        case 2:
-                            employee = new CommissionedSales(0, name, age, salary);
-                            Employee.employeeList.Add(employee);
-                            MessageBox.Show("Added new \"commissioned sales\"");
-                            break;
-                        case 3:
-                            employee = new Finance(0, name, age, salary);
-                            Employee.employeeList.Add(employee);
-                            MessageBox.Show("Added new \"finance\"");
-                            break;
-                        case 4:
-                            employee = new Technician(0, name, age, salary);
-                            Employee.employeeList.Add(employee);
-                            MessageBox.Show("Added new \"technician\"");
-                            break;
-                        default:
-                            MessageBox.Show("Choose a job"); break;
-                    }
-                }
-            }
+
+            string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+            string tableName = "Employees";
+            string primaryKeyColumnName = "empID";
+            int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
+            if (role != null) 
+                InsertNewRecordEmployee(id, x, name, age, salary, role, connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);
         }
 
         private void updateEmployeeButton_Click(object sender, EventArgs e)
@@ -262,8 +213,9 @@ namespace Project
                 }
             }
         }
-        static void InsertNewRecordEmployee(string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
+        static void InsertNewRecordEmployee(int id, int x, string name, int age, int salary, string role, string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
         {
+            Employee employee = new Employee();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -272,8 +224,62 @@ namespace Project
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Execute the INSERT command
-                    command.ExecuteNonQuery();
+                    if (role != null)
+                    {
+                        string connetionString;
+                        SqlConnection cnn;
+                        connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+                        cnn = new SqlConnection(connetionString);
+                        cnn.Open();
+                        SqlCommand cmd = new SqlCommand("insert into Employees values (@empID,@empName,@empAge,@empSalary,@empRole)", cnn);
+                        cmd.Parameters.AddWithValue("@empID", newPrimaryKeyValue);
+                        cmd.Parameters.AddWithValue("@empName", name);
+                        cmd.Parameters.AddWithValue("@empAge", age);
+                        cmd.Parameters.AddWithValue("@empSalary", salary);
+                        cmd.Parameters.AddWithValue("@empRole", role);
+                        cmd.ExecuteNonQuery();
+                        string querynew = "SELECT TOP 1 * FROM Employees ORDER BY empID DESC";
+                        SqlCommand cmdNew = new SqlCommand(querynew, cnn);
+                        SqlDataReader reader = cmdNew.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("empID"));
+                        }
+                        cnn.Close();
+                        if (id != 0)
+                        {
+                            switch (x)
+                            {
+                                case 0:
+                                    employee = new Management(id, name, age, salary);
+                                    Employee.employeeList.Add(employee);
+                                    MessageBox.Show("Added new \"management\"");
+                                    break;
+                                case 1:
+                                    employee = new Sales(id, name, age, salary);
+                                    Employee.employeeList.Add(employee);
+                                    MessageBox.Show("Added new \"sales\"");
+                                    break;
+                                case 2:
+                                    employee = new CommissionedSales(id, name, age, salary);
+                                    Employee.employeeList.Add(employee);
+                                    MessageBox.Show("Added new \"commissioned sales\"");
+                                    break;
+                                case 3:
+                                    employee = new Finance(id, name, age, salary);
+                                    Employee.employeeList.Add(employee);
+                                    MessageBox.Show("Added new \"finance\"");
+                                    break;
+                                case 4:
+                                    employee = new Technician(id, name, age, salary);
+                                    Employee.employeeList.Add(employee);
+                                    MessageBox.Show("Added new \"technician\"");
+                                    break;
+                                default:
+                                    MessageBox.Show("Choose a job"); break;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -135,6 +135,7 @@ namespace Project
                 }
             }
         }
+
         static void InsertNewRecord(string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
