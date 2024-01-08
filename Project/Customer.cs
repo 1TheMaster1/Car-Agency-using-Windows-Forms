@@ -3,30 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using System.Transactions;
 
 namespace Project //Yamen
 {//class for customers the company deals with
     public class Customer
     {
-        string id;
+        int id;
         string name;
         int age;
-        static int count = 2001; //for creating IDs
         string phoneNumber;
         int numberOfPurchase;
         int totalPayment;
         public static List<Customer> customerList = new List<Customer>();
-        public Customer(string name, int age, string phoneNumber) 
+
+        public Customer(int id, string name, int age, string phoneNumber, int NOP, int TP)
         {
-            id = count.ToString("0000");
+            this.id = id;
+            this.name = name;
+            this.age = age;
+            this.phoneNumber = phoneNumber;
+            numberOfPurchase = NOP;
+            totalPayment = TP;
+        }
+        public Customer(int id, string name, int age, string phoneNumber) 
+        {
+            this.id = id;
             this.name = name;
             this.age = age;
             this.phoneNumber = phoneNumber;
             numberOfPurchase = 0;
             totalPayment = 0;
         }
+
+        public int ID { get { return id; } }
 
         public void Purchase(int payment, int purchase) 
         {

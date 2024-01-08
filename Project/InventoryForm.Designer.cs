@@ -59,9 +59,10 @@
             // 
             // searchButton
             // 
-            searchButton.Location = new Point(452, 24);
+            searchButton.Location = new Point(396, 18);
+            searchButton.Margin = new Padding(3, 2, 3, 2);
             searchButton.Name = "searchButton";
-            searchButton.Size = new Size(94, 29);
+            searchButton.Size = new Size(82, 22);
             searchButton.TabIndex = 1;
             searchButton.Text = "Search";
             searchButton.UseVisualStyleBackColor = true;
@@ -69,9 +70,10 @@
             // 
             // carPictureBox
             // 
-            carPictureBox.Location = new Point(452, 87);
+            carPictureBox.Location = new Point(396, 65);
+            carPictureBox.Margin = new Padding(3, 2, 3, 2);
             carPictureBox.Name = "carPictureBox";
-            carPictureBox.Size = new Size(306, 225);
+            carPictureBox.Size = new Size(268, 169);
             carPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             carPictureBox.TabIndex = 2;
             carPictureBox.TabStop = false;
@@ -79,129 +81,137 @@
             // makeLabel
             // 
             makeLabel.AutoSize = true;
-            makeLabel.Location = new Point(56, 127);
+            makeLabel.Location = new Point(49, 95);
             makeLabel.Name = "makeLabel";
-            makeLabel.Size = new Size(52, 20);
+            makeLabel.Size = new Size(42, 15);
             makeLabel.TabIndex = 3;
             makeLabel.Text = "Make :";
             // 
             // modelLabel
             // 
             modelLabel.AutoSize = true;
-            modelLabel.Location = new Point(56, 94);
+            modelLabel.Location = new Point(49, 70);
             modelLabel.Name = "modelLabel";
-            modelLabel.Size = new Size(59, 20);
+            modelLabel.Size = new Size(47, 15);
             modelLabel.TabIndex = 4;
             modelLabel.Text = "Model :";
             // 
             // colorLabel
             // 
             colorLabel.AutoSize = true;
-            colorLabel.Location = new Point(56, 160);
+            colorLabel.Location = new Point(49, 120);
             colorLabel.Name = "colorLabel";
-            colorLabel.Size = new Size(52, 20);
+            colorLabel.Size = new Size(42, 15);
             colorLabel.TabIndex = 5;
             colorLabel.Text = "Color :";
             // 
             // horsePowerLabel
             // 
             horsePowerLabel.AutoSize = true;
-            horsePowerLabel.Location = new Point(56, 193);
+            horsePowerLabel.Location = new Point(49, 145);
             horsePowerLabel.Name = "horsePowerLabel";
-            horsePowerLabel.Size = new Size(99, 20);
+            horsePowerLabel.Size = new Size(80, 15);
             horsePowerLabel.TabIndex = 6;
             horsePowerLabel.Text = "Horse Power :";
             // 
             // typeLabel
             // 
             typeLabel.AutoSize = true;
-            typeLabel.Location = new Point(56, 226);
+            typeLabel.Location = new Point(49, 170);
             typeLabel.Name = "typeLabel";
-            typeLabel.Size = new Size(47, 20);
+            typeLabel.Size = new Size(37, 15);
             typeLabel.TabIndex = 7;
             typeLabel.Text = "Type :";
             // 
             // purchasePriceLabel
             // 
             purchasePriceLabel.AutoSize = true;
-            purchasePriceLabel.Location = new Point(56, 259);
+            purchasePriceLabel.Location = new Point(49, 194);
             purchasePriceLabel.Name = "purchasePriceLabel";
-            purchasePriceLabel.Size = new Size(110, 20);
+            purchasePriceLabel.Size = new Size(90, 15);
             purchasePriceLabel.TabIndex = 8;
             purchasePriceLabel.Text = "Purchase Price :";
             // 
             // sellingPriceLabel
             // 
             sellingPriceLabel.AutoSize = true;
-            sellingPriceLabel.Location = new Point(56, 292);
+            sellingPriceLabel.Location = new Point(49, 219);
             sellingPriceLabel.Name = "sellingPriceLabel";
-            sellingPriceLabel.Size = new Size(97, 20);
+            sellingPriceLabel.Size = new Size(77, 15);
             sellingPriceLabel.TabIndex = 9;
             sellingPriceLabel.Text = "Selling Price :";
             // 
             // carImageLabel
             // 
             carImageLabel.AutoSize = true;
-            carImageLabel.Location = new Point(56, 325);
+            carImageLabel.Location = new Point(49, 244);
             carImageLabel.Name = "carImageLabel";
-            carImageLabel.Size = new Size(114, 20);
+            carImageLabel.Size = new Size(91, 15);
             carImageLabel.TabIndex = 10;
             carImageLabel.Text = "Car Image URL :";
             // 
             // makeTextBox
             // 
-            makeTextBox.Location = new Point(187, 120);
+            makeTextBox.Location = new Point(164, 90);
+            makeTextBox.Margin = new Padding(3, 2, 3, 2);
             makeTextBox.Name = "makeTextBox";
-            makeTextBox.Size = new Size(125, 27);
+            makeTextBox.Size = new Size(110, 23);
             makeTextBox.TabIndex = 11;
             // 
             // modelTextBox
             // 
-            modelTextBox.Location = new Point(187, 87);
+            modelTextBox.Location = new Point(164, 65);
+            modelTextBox.Margin = new Padding(3, 2, 3, 2);
             modelTextBox.Name = "modelTextBox";
-            modelTextBox.Size = new Size(125, 27);
+            modelTextBox.Size = new Size(110, 23);
             modelTextBox.TabIndex = 12;
             // 
             // colorTextBox
             // 
-            colorTextBox.Location = new Point(187, 153);
+            colorTextBox.Location = new Point(164, 115);
+            colorTextBox.Margin = new Padding(3, 2, 3, 2);
             colorTextBox.Name = "colorTextBox";
-            colorTextBox.Size = new Size(125, 27);
+            colorTextBox.Size = new Size(110, 23);
             colorTextBox.TabIndex = 13;
             // 
             // horsePowerTextBox
             // 
-            horsePowerTextBox.Location = new Point(187, 186);
+            horsePowerTextBox.Location = new Point(164, 140);
+            horsePowerTextBox.Margin = new Padding(3, 2, 3, 2);
             horsePowerTextBox.Name = "horsePowerTextBox";
-            horsePowerTextBox.Size = new Size(125, 27);
+            horsePowerTextBox.Size = new Size(110, 23);
             horsePowerTextBox.TabIndex = 14;
             // 
             // purchasePriceTextBox
             // 
-            purchasePriceTextBox.Location = new Point(187, 252);
+            purchasePriceTextBox.Location = new Point(164, 189);
+            purchasePriceTextBox.Margin = new Padding(3, 2, 3, 2);
             purchasePriceTextBox.Name = "purchasePriceTextBox";
-            purchasePriceTextBox.Size = new Size(125, 27);
+            purchasePriceTextBox.Size = new Size(110, 23);
             purchasePriceTextBox.TabIndex = 15;
             // 
             // typeTextBox
             // 
-            typeTextBox.Location = new Point(187, 219);
+            typeTextBox.Location = new Point(164, 164);
+            typeTextBox.Margin = new Padding(3, 2, 3, 2);
             typeTextBox.Name = "typeTextBox";
-            typeTextBox.Size = new Size(125, 27);
+            typeTextBox.Size = new Size(110, 23);
             typeTextBox.TabIndex = 16;
             // 
             // carImageTextBox
             // 
-            carImageTextBox.Location = new Point(187, 318);
+            carImageTextBox.Location = new Point(164, 238);
+            carImageTextBox.Margin = new Padding(3, 2, 3, 2);
             carImageTextBox.Name = "carImageTextBox";
-            carImageTextBox.Size = new Size(125, 27);
+            carImageTextBox.Size = new Size(110, 23);
             carImageTextBox.TabIndex = 17;
             // 
             // sellingPriceTextBox
             // 
-            sellingPriceTextBox.Location = new Point(187, 285);
+            sellingPriceTextBox.Location = new Point(164, 214);
+            sellingPriceTextBox.Margin = new Padding(3, 2, 3, 2);
             sellingPriceTextBox.Name = "sellingPriceTextBox";
-            sellingPriceTextBox.Size = new Size(125, 27);
+            sellingPriceTextBox.Size = new Size(110, 23);
             sellingPriceTextBox.TabIndex = 18;
             // 
             // searchComboBox
@@ -209,16 +219,18 @@
             searchComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             searchComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             searchComboBox.FormattingEnabled = true;
-            searchComboBox.Location = new Point(187, 24);
+            searchComboBox.Location = new Point(164, 18);
+            searchComboBox.Margin = new Padding(3, 2, 3, 2);
             searchComboBox.Name = "searchComboBox";
-            searchComboBox.Size = new Size(259, 28);
+            searchComboBox.Size = new Size(227, 23);
             searchComboBox.TabIndex = 19;
             // 
             // addButton
             // 
-            addButton.Location = new Point(56, 402);
+            addButton.Location = new Point(49, 302);
+            addButton.Margin = new Padding(3, 2, 3, 2);
             addButton.Name = "addButton";
-            addButton.Size = new Size(94, 29);
+            addButton.Size = new Size(82, 22);
             addButton.TabIndex = 20;
             addButton.Text = "Add Car";
             addButton.UseVisualStyleBackColor = true;
@@ -226,9 +238,10 @@
             // 
             // buyButton
             // 
-            buyButton.Location = new Point(56, 450);
+            buyButton.Location = new Point(49, 338);
+            buyButton.Margin = new Padding(3, 2, 3, 2);
             buyButton.Name = "buyButton";
-            buyButton.Size = new Size(94, 29);
+            buyButton.Size = new Size(82, 22);
             buyButton.TabIndex = 21;
             buyButton.Text = "Buy";
             buyButton.UseVisualStyleBackColor = true;
@@ -236,9 +249,10 @@
             // 
             // sellButton
             // 
-            sellButton.Location = new Point(198, 450);
+            sellButton.Location = new Point(173, 338);
+            sellButton.Margin = new Padding(3, 2, 3, 2);
             sellButton.Name = "sellButton";
-            sellButton.Size = new Size(94, 29);
+            sellButton.Size = new Size(82, 22);
             sellButton.TabIndex = 22;
             sellButton.Text = "Sell";
             sellButton.UseVisualStyleBackColor = true;
@@ -246,25 +260,27 @@
             // 
             // amountTextBox
             // 
-            amountTextBox.Location = new Point(187, 351);
+            amountTextBox.Location = new Point(164, 263);
+            amountTextBox.Margin = new Padding(3, 2, 3, 2);
             amountTextBox.Name = "amountTextBox";
-            amountTextBox.Size = new Size(125, 27);
+            amountTextBox.Size = new Size(110, 23);
             amountTextBox.TabIndex = 24;
             // 
             // amountLabel
             // 
             amountLabel.AutoSize = true;
-            amountLabel.Location = new Point(56, 354);
+            amountLabel.Location = new Point(49, 266);
             amountLabel.Name = "amountLabel";
-            amountLabel.Size = new Size(125, 20);
+            amountLabel.Size = new Size(102, 15);
             amountLabel.TabIndex = 25;
             amountLabel.Text = "Amount in Stock :";
             // 
             // backButton
             // 
-            backButton.Location = new Point(687, 453);
+            backButton.Location = new Point(601, 340);
+            backButton.Margin = new Padding(3, 2, 3, 2);
             backButton.Name = "backButton";
-            backButton.Size = new Size(101, 26);
+            backButton.Size = new Size(88, 20);
             backButton.TabIndex = 26;
             backButton.Text = "Back";
             backButton.UseVisualStyleBackColor = true;
@@ -272,9 +288,10 @@
             // 
             // resetButton
             // 
-            resetButton.Location = new Point(198, 402);
+            resetButton.Location = new Point(173, 302);
+            resetButton.Margin = new Padding(3, 2, 3, 2);
             resetButton.Name = "resetButton";
-            resetButton.Size = new Size(94, 29);
+            resetButton.Size = new Size(82, 22);
             resetButton.TabIndex = 27;
             resetButton.Text = "Reset";
             resetButton.UseVisualStyleBackColor = true;
@@ -282,9 +299,9 @@
             // 
             // InventoryForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 503);
+            ClientSize = new Size(700, 445);
             Controls.Add(resetButton);
             Controls.Add(backButton);
             Controls.Add(amountLabel);
@@ -311,6 +328,7 @@
             Controls.Add(makeLabel);
             Controls.Add(carPictureBox);
             Controls.Add(searchButton);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "InventoryForm";
             Text = "InventoryForm";
             ((System.ComponentModel.ISupportInitialize)carPictureBox).EndInit();

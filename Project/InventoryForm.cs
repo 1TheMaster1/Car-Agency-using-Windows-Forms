@@ -30,7 +30,7 @@ namespace Project
             this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             employeeCurrent = employee;
-            prevForm = mainMenu;    
+            prevForm = mainMenu;
 
             foreach (Inventory inventory in Inventory.inventoryList)
             {
@@ -64,15 +64,6 @@ namespace Project
 
         private void addButton_Click(object sender, EventArgs e)
         {
-
-            string connetionString;
-            SqlConnection cnn;
-            connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
-            MessageBox.Show("Connection Open  !");
-            cnn.Close();
-
             foreach (Control c in this.Controls)
             {
                 if (c is System.Windows.Forms.TextBox)
@@ -96,15 +87,34 @@ namespace Project
             int purchasePrice = Convert.ToInt32(purchasePriceTextBox.Text);
             int sellingPrice = Convert.ToInt32(sellingPriceTextBox.Text);
             Bitmap carImage = new Bitmap(carImageTextBox.Text);
-            Car car = new Car(model, make, color, horsePower, type, purchasePrice, sellingPrice, carImage);
+            Car car = new Car(0, model, make, color, horsePower, type, purchasePrice, sellingPrice, carImage);
             int quantity = Convert.ToInt32(amountTextBox.Text);
-            Inventory inventory = new Inventory(car, quantity);
+            Inventory inventory = new Inventory(0, car, quantity);
             Inventory.inventoryList.Add(inventory);
             searchComboBox.Items.Clear();
             foreach (Inventory inventoryObject in Inventory.inventoryList)
             {
                 searchComboBox.Items.Add(inventoryObject.Car.Model);
             }
+
+            string connetionString;
+            SqlConnection cnn;
+            connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+            cnn = new SqlConnection(connetionString);
+            cnn.Open();
+            SqlCommand cmd = new SqlCommand("insert into Cars values (@carModel,@carMake,@carColor,@carHP,@carType,@carPP,@carSP,@carImage,@carStock)", cnn);
+            cmd.Parameters.AddWithValue("@carModel", model);
+            cmd.Parameters.AddWithValue("@carMake", make);
+            cmd.Parameters.AddWithValue("@carColor", color);
+            cmd.Parameters.AddWithValue("@carHP", horsePower);
+            cmd.Parameters.AddWithValue("@carType", type);
+            cmd.Parameters.AddWithValue("@carPP", purchasePrice);
+            cmd.Parameters.AddWithValue("@carSP", sellingPrice);
+            cmd.Parameters.AddWithValue("@carImage", carImageTextBox.Text);
+            cmd.Parameters.AddWithValue("@carStock", quantity);
+            cmd.ExecuteNonQuery();
+            cnn.Close();
+            MessageBox.Show("Successfully Added");
         }
 
         private void buyButton_Click(object sender, EventArgs e)
@@ -157,5 +167,36 @@ namespace Project
             }
             check = true;
         }
+        static int GetMaxPrimaryKeyValue(string connectionString, string tableName, string primaryKeyColumnName)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"SELECT MAX({primaryKeyColumnName}) FROM {tableName}";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    var result = command.ExecuteScalar();
+                    return (result == DBNull.Value) ? 0 : Convert.ToInt32(result);
+                }
+            }
+        }
+        static void InsertNewRecord(string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"INSERT INTO {tableName} ({primaryKeyColumnName}, ...) VALUES ({newPrimaryKeyValue}, ...)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Execute the INSERT command
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

@@ -9,6 +9,7 @@ namespace Project //Hossam
 {//class for cars in stock 
     public class Car
     {
+        int id;
         string? model;
         string? make;
         string? color;
@@ -17,10 +18,12 @@ namespace Project //Hossam
         int purchasePrice;
         int sellingPrice;
         Bitmap? carImage;
+        public static List<Car> carList = new List<Car>();
 
         //constructor to add a car to the cars file
-        public Car(string model, string make, string color, int horsePower, string type, int purchaseprice, int sellingPrice, Bitmap carImage)
+        public Car(int id, string model, string make, string color, int horsePower, string type, int purchaseprice, int sellingPrice, Bitmap carImage)
         {
+            this.id = id;
             this.model = model;
             this.make = make;
             this.color = color;
@@ -32,6 +35,7 @@ namespace Project //Hossam
         }
         public Car() { }
 
+        public int ID {  get { return id; } }
         public string? Model { get { return model; } }
         public string? Make { get { return make; } }
         public string? Color { get { return color; } }

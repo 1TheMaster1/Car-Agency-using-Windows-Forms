@@ -8,15 +8,15 @@ namespace Project //Omar
 {//inherits from Invoice and made for customer car purchase
     internal class CustomerCarPurchaseInvoice : Invoice
     {
-        int amount;
+        int id;
         Car? car;
         Customer? customer;
         public static List<CustomerCarPurchaseInvoice> customerCarPurchaseInvoiceList = new List<CustomerCarPurchaseInvoice>();
 
-        public CustomerCarPurchaseInvoice(int payment, Employee employee, int amount, Customer customer, Car car) 
+        public CustomerCarPurchaseInvoice(int id, int payment, Employee employee, Customer customer, Car car) 
             : base(payment, employee)
         {
-            this.amount = amount;
+            this.id = id;
             this.car = car;
             this.customer = customer;
         }

@@ -110,7 +110,6 @@
             jobComboBox.Name = "jobComboBox";
             jobComboBox.Size = new Size(198, 23);
             jobComboBox.TabIndex = 12;
-            jobComboBox.SelectedIndexChanged += jobComboBox_SelectedIndexChanged;
             // 
             // salaryLabel
             // 

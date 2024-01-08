@@ -31,6 +31,7 @@ namespace Project
         private void addEmployeeButton_Click(object sender, EventArgs e)
         {
             int id = 0;
+            int x = jobComboBox.SelectedIndex;
             string name = nameTextBox.Text;
             int age = Convert.ToInt32(ageTextBox.Text);
             int salary = Convert.ToInt32(salaryTextBox.Text);
@@ -73,7 +74,6 @@ namespace Project
                     id = reader.GetInt32(reader.GetOrdinal("empID"));
                 }
                 cnn.Close();
-                MessageBox.Show("Gamed Gamed");
                 if (id != 0)
                 {
                     switch (jobComboBox.SelectedIndex)
@@ -106,7 +106,7 @@ namespace Project
                         default:
                             MessageBox.Show("Choose a job"); break;
                     }
-                }               
+                }
             }
         }
 
@@ -125,6 +125,7 @@ namespace Project
         private void removeEmployeeButton_Click(object sender, EventArgs e)
         {
             int x = employeeDisplayList.SelectedIndex;
+            int id = Employee.employeeList[x - 1].ID;
             if (x > -1)
             {
                 Employee.employeeList.RemoveAt(x - 1);
@@ -134,11 +135,11 @@ namespace Project
                 cnn = new SqlConnection(connetionString);
                 cnn.Open();
                 SqlCommand cmd = new SqlCommand("Delete Employees where empID=@empID", cnn);
-                cmd.Parameters.AddWithValue("@empID", x - 1);
+                cmd.Parameters.AddWithValue("@empID", id);
                 cmd.ExecuteNonQuery();
                 cnn.Close();
                 MessageBox.Show("Successfully Deleted");
-            }   
+            }
             else
                 MessageBox.Show("Select an item");
 
@@ -150,24 +151,12 @@ namespace Project
             string name = customerNameTextBox.Text;
             int age = Convert.ToInt32(customerAgeTextBox.Text);
             string phone = customerNumberTextBox.Text;
-            Customer customer = new Customer(name, age, phone);
-            Customer.customerList.Add(customer);
-            MessageBox.Show("Added new \"customer\"");
 
-            string connetionString;
-            SqlConnection cnn;
-            connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
-            SqlCommand cmd = new SqlCommand("insert into Customers values (@customerName,@customerAge,@customerPhone,@customerNOP, @customerTP)", cnn);
-            cmd.Parameters.AddWithValue("@customerName", name);
-            cmd.Parameters.AddWithValue("@customerAge", age);
-            cmd.Parameters.AddWithValue("@customerPhone", phone);
-            cmd.Parameters.AddWithValue("@customerTP", 0);
-            cmd.Parameters.AddWithValue("@customerNOP", 0);
-            cmd.ExecuteNonQuery();
-            cnn.Close();
-            MessageBox.Show("Gamed Gamed");
+            string connectionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+            string tableName = "Customers";
+            string primaryKeyColumnName = "customerID";
+            int maxPrimaryKey = GetMaxPrimaryKeyValue(connectionString, tableName, primaryKeyColumnName);
+            InsertNewRecordCustomer(name,age,phone,connectionString, tableName, primaryKeyColumnName, maxPrimaryKey + 1);           
         }
 
         private void updateCustomerButton_Click(object sender, EventArgs e)
@@ -183,9 +172,24 @@ namespace Project
 
         private void removeCustomerButton_Click(object sender, EventArgs e)
         {
-            int x = customerDisplayList.SelectedIndex;
+            int x = customerDisplayList.SelectedIndex;           
             if (x > -1)
+            {
+                int id = Customer.customerList[x - 2].ID;
                 Customer.customerList.RemoveAt(x - 2);
+
+                string connetionString;
+                SqlConnection cnn;
+                connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+                cnn = new SqlConnection(connetionString);
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand("Delete Customers where customerID=@customerID", cnn);
+                cmd.Parameters.AddWithValue("@customerID", id);
+                cmd.ExecuteNonQuery();
+                cnn.Close();
+
+                MessageBox.Show("Successfully Deleted");
+            }
             else
                 MessageBox.Show("Select an item");
 
@@ -243,10 +247,69 @@ namespace Project
             }
             check = true;
         }
-
-        private void jobComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        static int GetMaxPrimaryKeyValue(string connectionString, string tableName, string primaryKeyColumnName)
         {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
+                string query = $"SELECT MAX({primaryKeyColumnName}) FROM {tableName}";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    var result = command.ExecuteScalar();
+                    return (result == DBNull.Value) ? 0 : Convert.ToInt32(result);
+                }
+            }
+        }
+        static void InsertNewRecordEmployee(string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"INSERT INTO {tableName} ({primaryKeyColumnName}, ...) VALUES ({newPrimaryKeyValue}, ...)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Execute the INSERT command
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        static void InsertNewRecordCustomer(string name,int age,string phone,string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
+        {
+            int id = 0;
+            
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"INSERT INTO {tableName} ({primaryKeyColumnName}, ...) VALUES ({newPrimaryKeyValue}, ...)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    SqlCommand cmd = new SqlCommand("insert into Customers values (@customerID,@customerName,@customerAge,@customerPhone,@customerNOP, @customerTP)", connection);
+                    cmd.Parameters.AddWithValue("@customerID", newPrimaryKeyValue);
+                    cmd.Parameters.AddWithValue("@customerName", name);
+                    cmd.Parameters.AddWithValue("@customerAge", age);
+                    cmd.Parameters.AddWithValue("@customerPhone", phone);
+                    cmd.Parameters.AddWithValue("@customerTP", 0);
+                    cmd.Parameters.AddWithValue("@customerNOP", 0);
+                    cmd.ExecuteNonQuery();
+                    string querynew = "SELECT TOP 1 * FROM Customers ORDER BY customerID DESC";
+                    SqlCommand cmdNew = new SqlCommand(querynew,connection);
+                    SqlDataReader reader = cmdNew.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("customerID"));
+                    }
+                }
+            }
+            Customer customer = new Customer(id, name, age, phone);
+            Customer.customerList.Add(customer);
+            MessageBox.Show("Added new \"customer\"");
         }
     }
 }

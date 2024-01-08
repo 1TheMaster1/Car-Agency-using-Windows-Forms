@@ -8,22 +8,20 @@ namespace Project //Omar
 {//class to access stock and update it
     public class Inventory
     {
-        string? id;
+        int id;
         Car car = new Car();
         int quantity;
-        static int count = 0;
         public static List<Inventory> inventoryList = new List<Inventory>();
 
-        public Inventory(Car car, int quantity)
+        public Inventory(int id, Car car, int quantity)
         {
-            id = count.ToString();
+            this.id = id;             
             this.car = car;
             this.quantity = quantity;
-            count = count + 1;
         }
         public Inventory() { }
 
-        public string? ID {  get { return id; } }
+        public int ID {  get { return id; } }
         public Car Car { get { return car; } }
         public int Quantity { get { return quantity; } set { if (value >= 0) quantity = value; } }
     }

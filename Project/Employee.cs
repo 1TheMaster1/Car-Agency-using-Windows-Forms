@@ -34,7 +34,7 @@ namespace Project //Yamen
             this.age = age;
             this.salary = salary;
             this.role = role;
-            password = id.ToString("0000");
+            password = id.ToString();
         }
         public Employee(string name)
         {
@@ -47,6 +47,7 @@ namespace Project //Yamen
         }
         public Employee() { }
 
+        public int ID { get { return id; } }
         public string? Name { get { return name; } }
         public string? Role {  get { return role; } }
         public string? Password { get { return password; } }

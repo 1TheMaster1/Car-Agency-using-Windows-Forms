@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Project
 {
@@ -50,17 +53,47 @@ namespace Project
 
         private void yesButton_Click(object sender, EventArgs e)
         {
+
             if (amountTextBox.Text == string.Empty)
             {
                 MessageBox.Show("Type an amount");
                 return;
             }
             int x = customerDisplayList.SelectedIndex;
+            int idcust = Customer.customerList[x - 2].ID;
             if (x > -1)
             {
+                int custID = idcust;
+                int empID = employeeCurrent.ID;
+                int carID = carCurrent.ID;
+                int invoiceTP = payment;
+                string invoiceType = "purchase";
+                int id = 0;
+
+                string connetionString;
+                SqlConnection cnn;
+                connetionString = @"Data Source=KOSHOK;Initial Catalog=""Car agency"";Integrated Security=True";
+                cnn = new SqlConnection(connetionString);
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand("insert into Invoices values (@empID,@customerID,@carID, @invoiceTP, @invoiceType)", cnn);
+                cmd.Parameters.AddWithValue("@empID", empID);
+                cmd.Parameters.AddWithValue("@customerID", custID);
+                cmd.Parameters.AddWithValue("@carID", carID);
+                cmd.Parameters.AddWithValue("@invoiceTP", invoiceTP);
+                cmd.Parameters.AddWithValue("@invoiceType", invoiceType);
+                cmd.ExecuteNonQuery();
+                string query = "SELECT TOP 1 * FROM Invoices ORDER BY invoiceCustomerID DESC";
+                SqlCommand cmdNew = new SqlCommand(query, cnn);
+                SqlDataReader reader = cmdNew.ExecuteReader();
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(reader.GetOrdinal("invoiceCustomerID"));
+                }
+                cnn.Close();
+                
                 Customer customer = Customer.customerList[x - 2];
                 customer.Purchase(payment, amount);
-                CustomerCarPurchaseInvoice invoice = new CustomerCarPurchaseInvoice(payment, employeeCurrent, amount, customer, carCurrent);
+                CustomerCarPurchaseInvoice invoice = new CustomerCarPurchaseInvoice(id ,payment, employeeCurrent, customer, carCurrent);
                 CustomerCarPurchaseInvoice.customerCarPurchaseInvoiceList.Add(invoice);
                 inventoryCurrent.Quantity -= amount;
                 if (employeeCurrent is CommissionedSales)
@@ -68,6 +101,7 @@ namespace Project
                     CommissionedSales commissionedSales = (CommissionedSales)employeeCurrent;
                     commissionedSales.NumberOfSales ++;
                 }
+                MessageBox.Show("Purchase Complete");
                 noButton_Click(sender, e);
             }
             else
@@ -84,6 +118,37 @@ namespace Project
         {
             base.OnFormClosing(e);
             prevForm.Show();
+        }
+
+        static int GetMaxPrimaryKeyValue(string connectionString, string tableName, string primaryKeyColumnName)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"SELECT MAX({primaryKeyColumnName}) FROM {tableName}";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    var result = command.ExecuteScalar();
+                    return (result == DBNull.Value) ? 0 : Convert.ToInt32(result);
+                }
+            }
+        }
+        static void InsertNewRecord(string connectionString, string tableName, string primaryKeyColumnName, int newPrimaryKeyValue)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = $"INSERT INTO {tableName} ({primaryKeyColumnName}, ...) VALUES ({newPrimaryKeyValue}, ...)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Execute the INSERT command
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
